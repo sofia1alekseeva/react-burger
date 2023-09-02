@@ -39,7 +39,7 @@ export const Modal = ({ active, setActive, title, children }) => {
 }
 
 Modal.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    children: PropTypes.element.isRequired,
     active: PropTypes.bool,
     setActive: PropTypes.func,
     title: PropTypes.string

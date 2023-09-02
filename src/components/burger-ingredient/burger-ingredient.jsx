@@ -2,11 +2,10 @@ import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-c
 import styles from './burger-ingredient.module.css';
 import PropTypes from 'prop-types';
 
-
 export const BurgerIngredient = ({ image, price, name, onClick }) => {
     return (
         <div className={`${styles.mainBlock}`} onClick={onClick}>
-            <Counter count={1} size="default" style={{ position: 'absolute', top: '0', right: '20px' }} />
+            <Counter count={1} size="default" />
             <img className={styles.image} alt={name} src={image} />
             <div className={styles.priceBlock}>
                 <p className="text text_type_digits-default mr-2">

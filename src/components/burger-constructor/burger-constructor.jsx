@@ -7,7 +7,6 @@ import { BurgerConstructorList } from '../burger-constructor-list/burger-constru
 import ingredientTypes from "../../utils/propsType";
 import PropTypes from 'prop-types';
 
-
 export const BurgerConstructor = ({ ingredients }) => {
     const [openModal, setOpenModal] = useState(false);
     return (

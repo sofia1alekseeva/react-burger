@@ -3,7 +3,6 @@ import ingredientTypes from "../../utils/propsType";
 import PropTypes from 'prop-types';
 import styles from './burger-constructor-list.module.css';
 
-
 export const BurgerConstructorList = ({ingredients}) => {
     const filteredIngredients = ingredients.filter(item => item.type !== 'bun');
 
