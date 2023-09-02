@@ -1,0 +1,41 @@
+.mainBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 60px;
+    width: 720px;
+}
+
+.image {
+    display: flex;
+    width: 480px;
+    height: 240px;
+}
+
+.name {
+    margin-top: 0;
+}
+
+.caloricContent {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    color: #8585AD;
+}
+
+.caloricItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.text {
+    margin: 0;
+    text-align: center;
+}
+
+.number {
+    margin-top: 8px;
+    font-family: Iceland;
+}

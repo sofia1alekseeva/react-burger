@@ -1,0 +1,25 @@
+.mainBlock {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    max-height: 70vh;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+}
+
+.ingredients {
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+    overflow-y: scroll;
+    /* width: 100%; */
+
+}
+
+.ingredientsType {
+    display: flex;
+    flex-wrap: wrap;
+}
