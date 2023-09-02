@@ -1,0 +1,30 @@
+.mainBlock {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    align-items: center;
+    width: 272px;
+    height: 208px;
+    cursor: pointer;
+}
+
+.mainBlock:nth-child(2n){
+    margin-left: 24px;
+    margin-right: 4px;
+}
+
+.image {
+    width: 240px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+.name {
+    text-align: center;
+    font-weight: 1000;
+    line-height: 24px;
+}
+
+.priceBlock {
+    display: flex
+}

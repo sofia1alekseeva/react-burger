@@ -1,0 +1,24 @@
+.navBlock {
+    display: flex;
+}
+
+.navBlock a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.notActive .logo svg {
+    fill: #8585AD;
+}
+
+.active .logo svg {
+    fill: #fff;
+}
+
+.notActive a {
+    color: #8585AD;
+}
+
+.active a {
+    color: #fff;
+}
