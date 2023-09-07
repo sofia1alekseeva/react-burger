@@ -8,7 +8,7 @@
     cursor: pointer;
 }
 
-.mainBlock:nth-child(2n){
+.mainBlock:nth-child(2n) {
     margin-left: 24px;
     margin-right: 4px;
 }
@@ -27,4 +27,10 @@
 
 .priceBlock {
     display: flex
+}
+
+.counter {
+    position: absolute;
+    top: 0;
+    right: 0px;
 }

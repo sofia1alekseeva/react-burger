@@ -12,7 +12,7 @@ export const ModalOverlay = ({ active, setActive, children }) => {
 }
 
 ModalOverlay.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.element).isRequired,
+    children: PropTypes.element.isRequired,
     active: PropTypes.bool,
     setActive: PropTypes.func
 };

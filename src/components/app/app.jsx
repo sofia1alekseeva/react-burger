@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
-import { AppHeader } from './components/app-header/app-header';
-import { BurgerConstructor } from './components/burger-constructor/burger-constructor';
-import { BurgerIngredients } from './components/burger-ingredients/burger-ingredients';
-import { getIngredients } from './utils/burger-api';
+import { AppHeader } from '../app-header/app-header';
+import { BurgerConstructor } from '../burger-constructor/burger-constructor';
+import { BurgerIngredients } from '../burger-ingredients/burger-ingredients';
+import { getIngredients } from '../../utils/burger-api';
+import styles from './app.module.css'
+
 
 function App() {
 
@@ -20,7 +22,7 @@ function App() {
   return (
     <div>
       <AppHeader/>
-      <div style={{display: "flex", justifyContent: "center"}}>
+      <div className={styles.mainBlock}>
       <BurgerIngredients ingredients={state.data}/>
       <BurgerConstructor ingredients={state.data}/>
       </div>
