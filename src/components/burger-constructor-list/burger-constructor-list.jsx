@@ -1,12 +1,24 @@
+import { useContext, useEffect, useRef, useMemo } from 'react';
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import ingredientTypes from "../../utils/propsType";
 import PropTypes from 'prop-types';
 import styles from './burger-constructor-list.module.css';
+import { BurgerConstructorContext } from '../../services/burgerConstructorContext';
 
-export const BurgerConstructorList = ({ingredients}) => {
-    const filteredIngredients = ingredients.filter(item => item.type !== 'bun');
+export const BurgerConstructorList = ({ orderDispatcher }) => {
+    const [ingredients] = useContext(BurgerConstructorContext);
+    const filteredIngredients = useMemo(
+        () => ingredients.filter(item => item.type !== 'bun'), [ingredients])
+    const priceRef = useRef(0);
+    const ingredientsIdsRef = useRef([]);
+    useEffect(() => {
+        if (filteredIngredients) {
+            orderDispatcher({ ingredientsPrice: priceRef.current, ingredientsIds: ingredientsIdsRef.current, type: "ingredients" });
+        }
 
+    }, [priceRef, ingredientsIdsRef])
     return filteredIngredients.map(item => {
+        priceRef.current += item.price;
+        ingredientsIdsRef.current.push(item._id)
         return (<div key={item._id} className={`${styles.burgerComponent} mb-4`}>
             <DragIcon type="primary" />
             <ConstructorElement
@@ -21,5 +33,5 @@ export const BurgerConstructorList = ({ingredients}) => {
 }
 
 BurgerConstructorList.propTypes = {
-    ingredients: PropTypes.arrayOf(ingredientTypes).isRequired
+    orderDispatcher: PropTypes.func.isRequired
 };

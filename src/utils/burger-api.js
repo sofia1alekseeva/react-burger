@@ -9,3 +9,16 @@ export const getIngredients = () => {
     return fetch(`${BURGER_API}/ingredients`)
         .then(checkReponse)
 }
+
+export const sendOrderIngredients = (ingredients) => {
+    return fetch(`${BURGER_API}/orders`,
+        {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({"ingredients": ingredients})
+                
+        }).then(checkReponse)
+    }
