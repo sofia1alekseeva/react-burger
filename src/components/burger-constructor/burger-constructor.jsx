@@ -1,108 +1,98 @@
 import { CurrencyIcon, ConstructorElement, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useContext, useEffect, useReducer, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './burger-constructor.module.css';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { BurgerConstructorList } from '../burger-constructor-list/burger-constructor-list';
-import { BurgerConstructorContext } from '../../services/burgerConstructorContext';
-import { sendOrderIngredients } from '../../utils/burger-api';
-
-
-function reducer(totalPriceState, action) {
-    switch (action.type) {
-        case "bun":
-            return {
-                ...totalPriceState,
-                bunsPrice: action.bunPrice * 2,
-                bunsIds: [action.bunId, action.bunId]
-            }
-        case "ingredients": {
-            return {
-                ...totalPriceState,
-                ingredientsPrice: action.ingredientsPrice,
-                ingredientsIds: action.ingredientsIds
-            }
-        }
-        case "total": {
-            return {
-                ...totalPriceState,
-                totalPrice: totalPriceState.bunsPrice + totalPriceState.ingredientsPrice
-            }
-        }
-        default:
-            throw new Error("Wrong action type")
-    }
-}
-const initialState = { totalPrice: 0, ingredientsPrice: 0, bunsPrice: 0, ingredientsIds: [], bunsIds: [] }
+import * as burgerConstructorSelector from '../../services/reducers/burger-constructor/selectors'
+import { setBun, setMain } from '../../services/reducers/burger-constructor';
+import { incrementCountIngredient, setCountBun } from '../../services/reducers/ingredients';
+import { sendOrderDetailsThunk } from '../../services/reducers/orderDetails';
+import { useDrop } from 'react-dnd';
+import { v4 as uuidv4 } from 'uuid';
 
 export const BurgerConstructor = () => {
-    const [ingredients] = useContext(BurgerConstructorContext);
+
+    const bun = useSelector(burgerConstructorSelector.bun);
+    const main = useSelector(burgerConstructorSelector.main);
+    const sum = useSelector(burgerConstructorSelector.sum)
+    const dispatch = useDispatch();
     const [openModal, setOpenModal] = useState(false);
-    const [orderState, orderDispatcher] = useReducer(reducer, initialState, undefined);
-    const [order, setOrder] = useState({
-        name: "",
-        order: {
-            number: 0
-        },
-        success: false
+
+    const dropIngredient = (ingredient) => {
+        if (ingredient.type === 'bun') {
+            if (ingredient._id !== bun?._id) {
+                dispatch(setBun({ ...ingredient, id: uuidv4() }));
+                dispatch(
+                    setCountBun(ingredient._id)
+                )
+            }
+        } else {
+            dispatch(
+                setMain([
+                    { ...ingredient, id: uuidv4() },
+                    ...main,
+                ]),
+            );
+            dispatch(
+                incrementCountIngredient(ingredient._id)
+            );
+        }
+    };
+
+    const [{ isHover }, drop] = useDrop({
+        accept: "ingredient",
+        collect: monitor => ({
+            isHover: monitor.isOver(),
+        }),
+        drop: dropIngredient,
     });
-    const filteredBun = ingredients.filter(item => item.type === 'bun')[0];
 
     function sendOrderDetails() {
-        const orderDetails = orderState.ingredientsIds.concat(orderState.bunsIds)
-        sendOrderIngredients(orderDetails).then(response => setOrder(
-            {
-                name: response.name,
-                order: response.order,
-                success: response.success
-            })
-        )
-            .catch((err) => console.log(err));
-        setOpenModal(true)
+        let ingredientsIds = [];
+        const buns = [bun?._id, bun?._id];
+        const mainIngredients = main.map(item => item._id);
+        ingredientsIds = ingredientsIds.concat(buns, mainIngredients);
+        dispatch(sendOrderDetailsThunk(ingredientsIds))
+        setOpenModal(true);
     }
-
-
-    useEffect(() => {
-        if (filteredBun) {
-            orderDispatcher({ type: 'bun', bunPrice: filteredBun.price, bunId: filteredBun._id });
-        }
-        orderDispatcher({ type: 'total' })
-    }, [filteredBun])
-
 
 
     return (
         <section>
-            <div className={`${styles.burgerConstructor} pt-25`}>
+            <div ref={drop} className={`${styles.burgerConstructor} pt-5 mt-25 ${isHover ? styles.onHover : ''
+                }`}>
                 <div className={`${styles.burgerComponent} mb-4 ml-8`}>
-                    <ConstructorElement
+                    {bun && <ConstructorElement
                         type="top"
                         isLocked={true}
-                        text={`${filteredBun.name} (верх)`}
-                        price={filteredBun.price}
-                        thumbnail={filteredBun.image}
-                    /></div>
-                <div className={`${styles.burgerComponents} custom-scroll mr-4 `}>
-                    <BurgerConstructorList orderDispatcher={orderDispatcher} />
+                        text={`${bun?.name} (верх)`}
+                        price={bun?.price}
+                        thumbnail={bun?.image}
+                    />}
                 </div>
+                    {!sum && <div className={styles.burgerConstructorEmpty}><h1 className={`text text_type_main-medium`}>Поместите ингредиенты сюда</h1></div>}
+                    {main && <BurgerConstructorList />}
                 <div className={`${styles.burgerComponent} mt-4 ml-8`}>
-                    <ConstructorElement
+                    {bun && <ConstructorElement
                         type="bottom"
                         isLocked={true}
-                        text={`${filteredBun.name} (низ)`}
-                        price={filteredBun.price}
-                        thumbnail={filteredBun.image}
-                    /></div>
-                <div className={`${styles.orderInfo} ml-4 mr-4 mt-10`}>
-                    <span className={`${styles.totalPrice} text text_type_digits-medium mr-2`}>{orderState.totalPrice}</span>
+                        text={`${bun?.name} (низ)`}
+                        price={bun?.price}
+                        thumbnail={bun?.image}
+                    />}
+                </div>
+                {<div className={`${styles.orderInfo} ml-4 mr-4 mt-10`}>
+                    <span className={`${styles.totalPrice} text text_type_digits-medium mr-2`}>{sum}</span>
                     <span className={styles.totalPriceSvg}><CurrencyIcon type="primary" /></span>
-                    <Button htmlType="button" type="primary" size="large" extraClass='ml-10' onClick={sendOrderDetails}>
+                    <Button htmlType="button" type="primary" size="large" extraClass='ml-10' onClick={sendOrderDetails} disabled={!sum}>
                         Оформить заказ
                     </Button>
-                </div>
+                </div>}
             </div>
             <Modal active={openModal} setActive={setOpenModal}>
-                <OrderDetails orderId={order.order.number} />
+                <OrderDetails />
             </Modal>
         </section>)
 }

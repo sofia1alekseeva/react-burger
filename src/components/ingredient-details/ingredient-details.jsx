@@ -1,10 +1,12 @@
 import styles from './ingredient-details.module.css'
-import ingredientTypes from "../../utils/propsType";
+import { useSelector } from 'react-redux';
+import * as ingredientDetailsSelector from '../../services/reducers/ingredient-details/selectors';
 
-export const IngredientDetails = ({ingredientDetails}) => {
+export const IngredientDetails = () => {
+    const ingredientDetails = useSelector(ingredientDetailsSelector.ingredientDetails);
 
     return (<section className={styles.mainBlock}>
-        <img className={`${styles.image} ml-5 mr-5 mb-4`} src={ingredientDetails.image}/>
+        <img className={`${styles.image} ml-5 mr-5 mb-4`} src={ingredientDetails.image} />
         <h3 className={`${styles.name} text text_type_main-medium mb-8`}>{ingredientDetails.name}</h3>
         <div className={styles.caloricContent}>
             <div className={`${styles.caloricItem} text text_type_main-default text_color_inactive`}>
@@ -26,9 +28,4 @@ export const IngredientDetails = ({ingredientDetails}) => {
         </div>
     </section>
     )
-
 }
-
-IngredientDetails.propTypes = {
-    ingredientDetails: ingredientTypes.isRequired
-};

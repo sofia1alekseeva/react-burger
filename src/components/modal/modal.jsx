@@ -5,13 +5,12 @@ import { useEffect } from "react";
 import { ModalOverlay } from "../modal-overlay/modal-overlay"
 import PropTypes from 'prop-types';
 
-
-export const Modal = ({ active, setActive, title, children }) => {
-
+export const Modal = ({ active, setActive, title, children, onClose }) => {
     useEffect(() => {
         const close = (e) => {
             if (e.key === 'Escape') {
                 setActive(false)
+                onClose && onClose();
             }
         }
         document.addEventListener('keydown', close)
@@ -27,7 +26,10 @@ export const Modal = ({ active, setActive, title, children }) => {
                     <div className={`${styles.wrapper}`}>
                         <p className={`${styles.title} text text_type_main-large`}>{title}</p>
                         <div className={styles.closeIcon}>
-                            <CloseIcon type="primary" onClick={() => setActive(false)} />
+                            <CloseIcon type="primary" onClick={() => {
+                                setActive(false);
+                                {onClose && onClose()}
+                            }} />
                         </div>
                     </div>
                     {children}
@@ -42,5 +44,6 @@ Modal.propTypes = {
     children: PropTypes.element.isRequired,
     active: PropTypes.bool,
     setActive: PropTypes.func,
-    title: PropTypes.string
+    title: PropTypes.string,
+    onClose: PropTypes.func
 };

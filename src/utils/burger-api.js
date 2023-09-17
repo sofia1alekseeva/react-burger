@@ -10,7 +10,7 @@ export const getIngredients = () => {
         .then(checkReponse)
 }
 
-export const sendOrderIngredients = (ingredients) => {
+export const sendOrderIngredients = (ingredientsIds) => {
     return fetch(`${BURGER_API}/orders`,
         {
             method: 'POST',
@@ -18,7 +18,7 @@ export const sendOrderIngredients = (ingredients) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({"ingredients": ingredients})
+            body: JSON.stringify({"ingredients": ingredientsIds})
                 
         }).then(checkReponse)
     }
