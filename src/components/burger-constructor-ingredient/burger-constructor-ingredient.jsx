@@ -67,15 +67,15 @@ export const BurgerConstructorIngredient = ({ ingredient }) => {
 
     return <div ref={drop}>
         <div style={{ opacity }} ref={drag} data-handler-id={handlerId} className={`${styles.burgerComponent} mb-4`} >
-        <DragIcon type="primary" />
-        <ConstructorElement
-            extraClass='ml-2'
-            isLocked={false}
-            text={ingredient.name}
-            price={ingredient.price}
-            thumbnail={ingredient.image}
-            handleClose={() => removeMain(ingredient)}
-        /></div></div>
+            <DragIcon type="primary" />
+            <ConstructorElement
+                extraClass='ml-2'
+                isLocked={false}
+                text={ingredient.name}
+                price={ingredient.price}
+                thumbnail={ingredient.image}
+                handleClose={() => removeMain(ingredient)}
+            /></div></div>
 
 }
 

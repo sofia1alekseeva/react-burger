@@ -1,5 +1,5 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
-import { useState, useMemo, useRef} from 'react'
+import { useState, useMemo, useRef } from 'react'
 import { BurgerIngredient } from '../burger-ingredient/burger-ingredient'
 import styles from './burger-ingredients.module.css'
 import { Modal } from '../modal/modal';
@@ -36,14 +36,14 @@ export const BurgerIngredients = () => {
     const main = useMemo(() => ingredients.filter((item) => item?.type === 'main'), [ingredients]);
     const sauces = useMemo(() => ingredients.filter((item) => item?.type === 'sauce'), [ingredients]);
 
-	const handleScroll = () => {
-		const bunsDistance = Math.abs(tabsRef.current.getBoundingClientRect().top - bunsRef.current.getBoundingClientRect().top)
-		const saucesDistance = Math.abs(tabsRef.current.getBoundingClientRect().top - saucesRef.current.getBoundingClientRect().top)
-		const mainDistance = Math.abs(tabsRef.current.getBoundingClientRect().top - mainRef.current.getBoundingClientRect().top)
-		const minDistance = Math.min(bunsDistance, saucesDistance, mainDistance);
-		const currentHeader = minDistance === bunsDistance ? 'bun' : minDistance === saucesDistance ? 'sauce' : 'main';
-		setCurrent(prevState => (currentHeader === prevState.current ? prevState.current : currentHeader))
-	}
+    const handleScroll = () => {
+        const bunsDistance = Math.abs(tabsRef.current.getBoundingClientRect().top - bunsRef.current.getBoundingClientRect().top)
+        const saucesDistance = Math.abs(tabsRef.current.getBoundingClientRect().top - saucesRef.current.getBoundingClientRect().top)
+        const mainDistance = Math.abs(tabsRef.current.getBoundingClientRect().top - mainRef.current.getBoundingClientRect().top)
+        const minDistance = Math.min(bunsDistance, saucesDistance, mainDistance);
+        const currentHeader = minDistance === bunsDistance ? 'bun' : minDistance === saucesDistance ? 'sauce' : 'main';
+        setCurrent(prevState => (currentHeader === prevState.current ? prevState.current : currentHeader))
+    }
 
 
     const openIngredients = (item) => {

@@ -21,10 +21,10 @@ function App() {
     <div>
       <AppHeader />
       <DndProvider backend={HTML5Backend}>
-      <div className={styles.mainBlock}>
-        <BurgerIngredients />
+        <main className={styles.mainBlock}>
+          <BurgerIngredients />
           <BurgerConstructor />
-      </div>
+        </main>
       </DndProvider>
     </div>
   );

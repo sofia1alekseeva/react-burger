@@ -1,7 +1,6 @@
-
 .burgerComponents {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    max-width:100%;
+    max-width: 100%;
 }

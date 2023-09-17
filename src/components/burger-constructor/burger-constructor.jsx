@@ -1,5 +1,5 @@
 import { CurrencyIcon, ConstructorElement, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useContext, useEffect, useReducer, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './burger-constructor.module.css';
 import { Modal } from '../modal/modal';
@@ -8,7 +8,7 @@ import { BurgerConstructorList } from '../burger-constructor-list/burger-constru
 import * as burgerConstructorSelector from '../../services/reducers/burger-constructor/selectors'
 import { setBun, setMain } from '../../services/reducers/burger-constructor';
 import { incrementCountIngredient, setCountBun } from '../../services/reducers/ingredients';
-import { sendOrderDetailsThunk } from '../../services/reducers/orderDetails';
+import { sendOrderDetailsThunk } from '../../services/reducers/order-details';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -72,8 +72,8 @@ export const BurgerConstructor = () => {
                         thumbnail={bun?.image}
                     />}
                 </div>
-                    {!sum && <div className={styles.burgerConstructorEmpty}><h1 className={`text text_type_main-medium`}>Поместите ингредиенты сюда</h1></div>}
-                    {main && <BurgerConstructorList />}
+                {!sum && <div className={styles.burgerConstructorEmpty}><h1 className={`text text_type_main-medium`}>Поместите ингредиенты сюда</h1></div>}
+                {main && <BurgerConstructorList />}
                 <div className={`${styles.burgerComponent} mt-4 ml-8`}>
                     {bun && <ConstructorElement
                         type="bottom"
