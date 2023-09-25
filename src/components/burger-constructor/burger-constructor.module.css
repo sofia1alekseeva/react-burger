@@ -2,16 +2,8 @@
     display: flex;
     flex-direction: column;
     gap: 0px;
-    max-height: 65vh;
+    max-height: 68vh;
     width: 600px;
-}
-
-.burgerComponents {
-    display: flex;
-    min-height: 47vh;
-    flex-direction: column;
-    overflow-y: scroll;
-    max-width:100%;
 }
 
 .burgerComponent {
@@ -25,9 +17,23 @@
     width: 568px;
 }
 
-.totalPriceSvg svg{
+.totalPriceSvg svg {
     display: flex;
     justify-content: center;
     width: 36px;
     height: 36px;
+}
+
+.onHover {
+    border: 1px solid #3C39EC;
+    border-radius: var(--common-border-radius);
+    box-shadow: 0px 0px 30px 0px #3C39EC;
+    padding-bottom: 30px;
+}
+
+.burgerConstructorEmpty {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
