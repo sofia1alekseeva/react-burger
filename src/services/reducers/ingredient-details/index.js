@@ -27,6 +27,7 @@ export const ingredientDetailsSlice = createSlice({
         resetIngredientDetails: (state) => {
             state.ingredientDetails = initialState.ingredientDetails
         }
+        
     }
 })
 

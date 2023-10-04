@@ -26,6 +26,7 @@
 
 .caloricItem {
     display: flex;
+    width: 120px;
     flex-direction: column;
     justify-content: center;
 }

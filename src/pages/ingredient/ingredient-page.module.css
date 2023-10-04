@@ -1,0 +1,13 @@
+.mainBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 640px;
+    margin: 120px auto 0;
+}
+
+.title {
+    text-align: center;
+    padding-left: 80px ;
+    margin-bottom: 1px;
+}

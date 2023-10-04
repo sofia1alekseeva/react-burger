@@ -7,6 +7,7 @@ import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { useSelector, useDispatch } from 'react-redux';
 import * as ingredientsSelector from '../../services/reducers/ingredients/selectors';
 import { setIngredientDetails } from '../../services/reducers/ingredient-details';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const title = {
     bun: "Булки",
@@ -15,8 +16,10 @@ const title = {
 }
 
 export const BurgerIngredients = () => {
+    const navigate = useNavigate();
+
     const [current, setCurrent] = useState('bun')
-    const [openModal, setOpenModal] = useState(false);
+    // const [openModal, setOpenModal] = useState(false);
     const dispatch = useDispatch();
     const ingredients = useSelector(ingredientsSelector.ingredients);
     const setTab = (tab) => {
@@ -47,8 +50,10 @@ export const BurgerIngredients = () => {
 
 
     const openIngredients = (item) => {
-        dispatch(setIngredientDetails(item));
-        setOpenModal(true);
+        // setOpenModal(true);
+        navigate(`ingredients/${item._id}`, {state: {
+            isOpenModal: true
+        }})
     }
 
     const renderList = (array) => {
@@ -81,8 +86,9 @@ export const BurgerIngredients = () => {
             {renderList(sauces)}
             {renderList(main)}
         </div>
-        {<Modal active={openModal} setActive={setOpenModal} title="Детали ингредиента">
+        {}
+        {/* {<Modal active={openModal} setActive={setOpenModal} title="Детали ингредиента">
             <IngredientDetails />
-        </Modal>}
+        </Modal>} */}
     </section>)
 }

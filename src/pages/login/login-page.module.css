@@ -1,0 +1,30 @@
+.mainBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: "center";
+    align-items: center;
+    margin: 180px auto 0;
+    gap: 24px;
+    width: 480px;
+}
+
+.title {
+    width: 100%;
+    text-align: center;
+}
+
+.bottomBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 56px;
+    gap: 16px;
+}
+
+.bottomBlockActions {
+    display: flex;
+}
+
+.bottomButton {
+    padding:0
+}

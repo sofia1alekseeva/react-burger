@@ -4,6 +4,7 @@ import * as ingredientDetailsSelector from '../../services/reducers/ingredient-d
 
 export const IngredientDetails = () => {
     const ingredientDetails = useSelector(ingredientDetailsSelector.ingredientDetails);
+    console.log("ingredientDetails", ingredientDetails)
 
     return (<section className={styles.mainBlock}>
         <img className={`${styles.image} ml-5 mr-5 mb-4`} src={ingredientDetails.image} />

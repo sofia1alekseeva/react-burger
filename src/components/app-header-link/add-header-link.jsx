@@ -1,14 +1,15 @@
-import appHeaderLink from './app-header-link.module.css';
+import styles from './app-header-link.module.css';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const AppHeaderLink = ({ isActive, onClick, text, icon }) => {
+const AppHeaderLink = ({ isActive, onClick, text, icon, to }) => {
 
   return (
-    <nav className={`${isActive ? appHeaderLink.active : appHeaderLink.notActive} ${appHeaderLink.navBlock} p-4`}
+    <nav className={`${isActive ? styles.active : styles.notActive} ${styles.navBlock} p-4`}
       onClick={onClick}
     >
-      <span className={`${appHeaderLink.logo} pl-2`}>{icon}</span>
-      <a className='pl-2'>{text}</a>
+      <span className={`${styles.logo} pl-2`}>{icon}</span>
+      <Link to={to} className='pl-2'>{text}</Link>
     </nav >
   )
 }
@@ -18,6 +19,7 @@ AppHeaderLink.propTypes = {
   onClick: PropTypes.func.isRequired,
   text: PropTypes.string.isRequired,
   icon: PropTypes.object.isRequired,
+  to: PropTypes.string.isRequired,
 };
 
 export default AppHeaderLink;
