@@ -16,7 +16,7 @@ const AppHeaderLink = ({ isActive, onClick, text, icon, to }) => {
 
 AppHeaderLink.propTypes = {
   isActive: PropTypes.bool.isRequired,
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   text: PropTypes.string.isRequired,
   icon: PropTypes.object.isRequired,
   to: PropTypes.string.isRequired,

@@ -26,5 +26,10 @@
 }
 
 .bottomButton {
-    padding:0
+    padding: 0
+}
+
+.errorMessage {
+    color: red;
+    opacity: 0.8;
 }

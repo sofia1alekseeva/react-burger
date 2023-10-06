@@ -1,16 +1,13 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from './profile-page.module.css'
 import { user } from "../../services/reducers/profile/selectors";
-import { resetPasswordThunk, updateUserThunk } from "../../services/reducers/profile";
-import { sendResetPasswordData } from "../../utils/burger-api";
+import { updateUserThunk } from "../../services/reducers/profile";
 
 const initialDisabledState = { email: true, password: true, name: true };
 
 const ProfilePage = () => {
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const userData = useSelector(user);
     const inputRef = useRef({});
@@ -50,14 +47,10 @@ const ProfilePage = () => {
         setTimeout(() => {
             inputRef.current[type].focus();
         })
-        console.log("e", e)
-        // console.log("disabled", isDisabled)
-
     }
 
     const onChange = (e, type) => {
         setValue((prevState) => ({ ...prevState, [type]: e.target.value }))
-        console.log("value", value)
     }
 
     const onSubmit = (e) => {
@@ -84,7 +77,8 @@ const ProfilePage = () => {
                 icon="EditIcon"
                 disabled={isDisabled.name}
                 onIconClick={(e) => onIconClick(e, "name")}
-                name={'name'} value={value.name}
+                name={'name'}
+                value={value?.name}
                 onChange={(e) => onChange(e, "name")}
                 ref={el => inputRef.current["name"] = el}
             />
@@ -106,7 +100,7 @@ const ProfilePage = () => {
                 disabled={isDisabled.password}
                 onIconClick={(e) => onIconClick(e, "password")}
                 name={'password'}
-                value={value.password}
+                value={value?.password}
                 onChange={(e) => onChange(e, "password")}
                 ref={el => inputRef.current["password"] = el}
                 onFocus={() => setIsPasswordFocus(true)}

@@ -2,12 +2,9 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components'
 import { useState, useMemo, useRef } from 'react'
 import { BurgerIngredient } from '../burger-ingredient/burger-ingredient'
 import styles from './burger-ingredients.module.css'
-import { Modal } from '../modal/modal';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import * as ingredientsSelector from '../../services/reducers/ingredients/selectors';
-import { setIngredientDetails } from '../../services/reducers/ingredient-details';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const title = {
     bun: "Булки",
@@ -19,8 +16,6 @@ export const BurgerIngredients = () => {
     const navigate = useNavigate();
 
     const [current, setCurrent] = useState('bun')
-    // const [openModal, setOpenModal] = useState(false);
-    const dispatch = useDispatch();
     const ingredients = useSelector(ingredientsSelector.ingredients);
     const setTab = (tab) => {
         setCurrent(tab);
@@ -50,7 +45,6 @@ export const BurgerIngredients = () => {
 
 
     const openIngredients = (item) => {
-        // setOpenModal(true);
         navigate(`ingredients/${item._id}`, {state: {
             isOpenModal: true
         }})
@@ -86,9 +80,5 @@ export const BurgerIngredients = () => {
             {renderList(sauces)}
             {renderList(main)}
         </div>
-        {}
-        {/* {<Modal active={openModal} setActive={setOpenModal} title="Детали ингредиента">
-            <IngredientDetails />
-        </Modal>} */}
     </section>)
 }

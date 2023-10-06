@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./register-page.module.css"
 import { useDispatch } from "react-redux";
-import { registerThunk } from "../../services/reducers/auth";
+import { registerThunk } from "../../services/reducers/auth/register";
 
 const RegisterPage = () => {
     const navigate = useNavigate();
@@ -19,7 +19,6 @@ const RegisterPage = () => {
 
     const onChange = (e, type) => {
         setValue((prevState) => ({...prevState, [type]: e.target.value}))
-        console.log("value", value)
     }
 
     const onSubmit = async () => {
@@ -40,7 +39,7 @@ const RegisterPage = () => {
         <Button type="primary" htmlType="submit">Зарегистрироваться</Button>
         <div className={styles.bottomBlock}>
         <span className={`text text_type_main-default text_color_inactive mr-2`}>Уже зарегистрированы?</span>
-        <Button type="secondary" onClick={linkToLoginPage} extraClass={styles.loginButton}>Войти</Button>
+        <Button htmlType="button" type="secondary" onClick={linkToLoginPage} extraClass={styles.loginButton}>Войти</Button>
         </div>
 
     </form>

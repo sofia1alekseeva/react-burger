@@ -6,14 +6,15 @@ import { Modal } from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
 import { BurgerConstructorList } from '../burger-constructor-list/burger-constructor-list';
 import * as burgerConstructorSelector from '../../services/reducers/burger-constructor/selectors'
-import { setBun, setMain } from '../../services/reducers/burger-constructor';
-import { incrementCountIngredient, setCountBun } from '../../services/reducers/ingredients';
+import { resetBurgerConstructor, setBun, setMain } from '../../services/reducers/burger-constructor';
+import { incrementCountIngredient, resetCountIngredients, setCountBun } from '../../services/reducers/ingredients';
 import { sendOrderDetailsThunk } from '../../services/reducers/order-details';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
+import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor = () => {
-
+    const navigate = useNavigate();
     const bun = useSelector(burgerConstructorSelector.bun);
     const main = useSelector(burgerConstructorSelector.main);
     const sum = useSelector(burgerConstructorSelector.sum)
@@ -50,12 +51,18 @@ export const BurgerConstructor = () => {
     });
 
     function sendOrderDetails() {
+        const accessToken = localStorage.getItem("accessToken");
+        if(!accessToken) {
+            navigate("/login")
+        }
         let ingredientsIds = [];
         const buns = [bun?._id, bun?._id];
         const mainIngredients = main.map(item => item._id);
         ingredientsIds = ingredientsIds.concat(buns, mainIngredients);
         dispatch(sendOrderDetailsThunk(ingredientsIds))
         setOpenModal(true);
+        dispatch(resetBurgerConstructor())
+        dispatch(resetCountIngredients())
     }
 
 

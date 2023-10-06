@@ -22,12 +22,12 @@ export const ingredientDetailsSlice = createSlice({
     initialState,
     reducers: {
         setIngredientDetails: (state, action) => {
-            state.ingredientDetails = action.payload
+            state.ingredientDetails = action.payload;
         },
         resetIngredientDetails: (state) => {
             state.ingredientDetails = initialState.ingredientDetails
         }
-        
+
     }
 })
 

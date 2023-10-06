@@ -5,8 +5,9 @@ import AppRoutes from '../app-routes/app-routes';
 import { getIngredientsThunk } from '../../services/reducers/ingredients';
 import { getUserThunk, resetUser } from '../../services/reducers/profile';
 import { error, user } from '../../services/reducers/profile/selectors';
-import { updateTokenThunk } from '../../services/reducers/auth';
-import { loading } from '../../services/reducers/auth/selectors';
+import { updateTokenThunk } from '../../services/reducers/auth/update-token';
+import { loading as loginLoading } from '../../services/reducers/auth/login/selectors';
+import { loading as registerLoading } from '../../services/reducers/auth/register/selectors';
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
   const accessToken = localStorage.getItem('accessToken');
   const refreshToken = localStorage.getItem('refreshToken');
   const userData = useSelector(user);
-  const loadingStatus = useSelector(loading);
+  const loadingLoginStatus = useSelector(loginLoading);
+  const loadingRegisterStatus = useSelector(registerLoading);
   const errorUserData = useSelector(error)
 
   useEffect(() => {
@@ -23,15 +25,13 @@ function App() {
 
   useEffect(() => {
 
-    if (loadingStatus === "succeded" || accessToken) {
-      console.log("accessToken", accessToken)
+    if (loadingLoginStatus === "succeeded" || loadingRegisterStatus  === "succeeded" || accessToken) {
       dispatch(getUserThunk())
     }
 
-  }, [dispatch, loadingStatus])
+  }, [dispatch, loadingLoginStatus, accessToken])
 
   useEffect(() => {
-    console.log("errorUserData", errorUserData)
     if (errorUserData === "jwt expired") {
       dispatch(updateTokenThunk()).then(() =>
         dispatch(getUserThunk()));

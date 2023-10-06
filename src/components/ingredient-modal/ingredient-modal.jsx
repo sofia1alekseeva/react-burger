@@ -11,16 +11,11 @@ const IngredientModal = () => {
     const location = useLocation();
     const dispatch = useDispatch();
     const ingredients = useSelector(ingredientsSelector.ingredients);
-    const loading = useSelector(ingredientsSelector.loading);
-    const isLoading = loading === 'pending';
     const {id} = useParams();
     useEffect(
         () => {
-            console.log("id", id)
-            console.log("ingredients", ingredients)
           if (id && ingredients.length > 0){
             const ingredient = ingredients.find((item) => item._id === id);
-            console.log("ingredient",ingredient)
             dispatch(setIngredientDetails(ingredient));}
         },
         [

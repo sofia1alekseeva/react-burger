@@ -44,7 +44,7 @@ export const sendLogoutData = () => request('auth/logout', {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({token: localStorage.getItem('refreshToken')})
+    body: JSON.stringify({ token: localStorage.getItem('refreshToken') })
 })
 
 export const updateTokenData = () => request('auth/token', {
@@ -53,7 +53,7 @@ export const updateTokenData = () => request('auth/token', {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-    body: JSON.stringify({token: localStorage.getItem('refreshToken')})
+    body: JSON.stringify({ token: localStorage.getItem('refreshToken') })
 })
 
 export const getUserData = () => request('auth/user', {

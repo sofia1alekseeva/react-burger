@@ -1,8 +1,9 @@
-import { Oval, ThreeDots } from 'react-loader-spinner';
-import styles from "./loader.module.css"
+import { Oval } from 'react-loader-spinner';
+import styles from "./loader.module.css";
+import PropTypes from 'prop-types';
 
-const Loader = () => {
-    return (<div className={styles.mainBlock}>
+const Loader = ({extraClass}) => {
+    return (<div className={`${styles.mainBlock} ${extraClass ? extraClass : ""}`}>
         <Oval
   height={100}
   width={100}
@@ -19,3 +20,7 @@ const Loader = () => {
 }
 
 export default Loader;
+
+Loader.propTypes = {
+    extraClass: PropTypes.string
+  };

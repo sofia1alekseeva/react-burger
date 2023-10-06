@@ -2,7 +2,7 @@ import { Logo, BurgerIcon, ListIcon, ProfileIcon } from '@ya.praktikum/react-dev
 import styles from "./app-header.module.css"
 import AppHeaderLink from '../app-header-link/add-header-link';
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { user } from '../../services/reducers/profile/selectors';
 
@@ -10,12 +10,21 @@ export const AppHeader = () => {
   const [active, setActive] = useState('/');
   const userData = useSelector(user);
   const location = useLocation();
+  const [isUser, setIsUser] = useState(false)
 
   useEffect(() => {
     if(location.pathname){
       setActive(location.pathname)
     }
-  }, [location])
+  }, [location]);
+
+  useEffect(() => {
+    if(userData) {
+      setIsUser(true)
+    } else {
+      setIsUser(false)
+    }
+  }, [userData])
 
   return (
     <header className={styles.header} >
@@ -33,7 +42,7 @@ export const AppHeader = () => {
         <div className={styles.logo}>
           <Logo />
         </div>
-        {userData ? <AppHeaderLink
+        {isUser ? <AppHeaderLink
           to="/profile"
           isActive={active.includes("/profile")}
           text="Личный кабинет"

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import {  sendOrderIngredients } from '../../../utils/burger-api';
+import { sendOrderIngredients } from '../../../utils/burger-api';
 
 const initialState = {
     orderDetails: {
@@ -33,7 +33,7 @@ export const orderDetailsSlice = createSlice({
                 state.loading = 'succeeded';
                 state.orderDetails = action.payload;
                 state.error = initialState.error;
-                
+
             })
     }
 })
