@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import styles from "./reset-password.module.css"
-import { clearProfileError, resetPasswordThunk } from "../../services/reducers/profile";
-import { error, loading } from "../../services/reducers/profile/selectors";
+import { clearResetPasswordError, resetPasswordThunk } from "../../services/reducers/profile/reset-password";
+import { error, loading } from "../../services/reducers/profile/reset-password/selectors";
 
 const ResetPasswordPage = () => {
     const navigate = useNavigate();
@@ -24,7 +24,7 @@ const ResetPasswordPage = () => {
     useEffect(() => {
         if(tokenLoading === 'succeeded') {
             navigate("/");
-            dispatch(clearProfileError());
+            dispatch(clearResetPasswordError());
         }
     }, [tokenLoading])
 

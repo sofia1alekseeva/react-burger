@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./forgot-password.module.css"
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { forgotPasswordThunk } from "../../services/reducers/profile";
+import { forgotPasswordThunk } from "../../services/reducers/profile/forgot-password";
 
 const ForgotPasswordPage = () => {
     const navigate = useNavigate();

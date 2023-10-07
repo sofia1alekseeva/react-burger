@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getUserData, sendForgotPasswordData, sendResetPasswordData, updateUserData } from "../../../utils/burger-api";
+import { getUserData, updateUserData } from "../../../utils/burger-api";
 
 
 const initialState = {
   user: null,
-  loading: null,
-  error: null
+  loading: "",
+  error: ""
 }
 
 export const getUserThunk = createAsyncThunk(
@@ -16,16 +16,6 @@ export const getUserThunk = createAsyncThunk(
 export const updateUserThunk = createAsyncThunk(
   'profile/updateUser',
   async (userData) => await updateUserData(userData)
-);
-
-export const forgotPasswordThunk = createAsyncThunk(
-  'profile/forgotPassword',
-  async (data) => await sendForgotPasswordData(data),
-);
-
-export const resetPasswordThunk = createAsyncThunk(
-  'profile/resetPassword',
-  async (data) => await sendResetPasswordData(data),
 );
 
 
@@ -64,32 +54,6 @@ const profileSlice = createSlice({
       state.loading = 'succeeded';
     });
     builder.addCase(updateUserThunk.rejected, (state, action) => {
-      state.loading = 'failed';
-      state.error = action.error.message;
-    });
-
-    builder.addCase(forgotPasswordThunk.pending, (state) => {
-      state.loading = 'pending';
-      state.error = undefined;
-    });
-    builder.addCase(forgotPasswordThunk.fulfilled, (state) => {
-      state.passwordIsSend = true;
-      state.loading = 'succeeded';
-    });
-    builder.addCase(forgotPasswordThunk.rejected, (state, action) => {
-      state.loading = 'failed';
-      state.error = action.error.message;
-    });
-
-    builder.addCase(resetPasswordThunk.pending, (state) => {
-      state.loading = 'pending';
-      state.error = initialState.error;;
-    });
-    builder.addCase(resetPasswordThunk.fulfilled, (state) => {
-      state.error = initialState.error;
-      state.loading = 'succeeded';
-    });
-    builder.addCase(resetPasswordThunk.rejected, (state, action) => {
       state.loading = 'failed';
       state.error = action.error.message;
     });

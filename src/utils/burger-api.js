@@ -11,6 +11,7 @@ export const getIngredients = () => request('ingredients');
 
 export const sendOrderIngredients = (ingredientsIds) => request('orders', {
     method: 'POST',
+    'authorization': localStorage.getItem('accessToken'),
     headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

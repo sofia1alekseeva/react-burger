@@ -1,5 +1,5 @@
 import { CurrencyIcon, ConstructorElement, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './burger-constructor.module.css';
 import { Modal } from '../modal/modal';
@@ -53,8 +53,11 @@ export const BurgerConstructor = () => {
     function sendOrderDetails() {
         const accessToken = localStorage.getItem("accessToken");
         if(!accessToken) {
-            navigate("/login")
-        }
+            bun && localStorage.setItem("buns", JSON.stringify(bun));
+            main && localStorage.setItem("main", JSON.stringify(main));
+            navigate("/login");
+        } else {
+
         let ingredientsIds = [];
         const buns = [bun?._id, bun?._id];
         const mainIngredients = main.map(item => item._id);
@@ -63,7 +66,21 @@ export const BurgerConstructor = () => {
         setOpenModal(true);
         dispatch(resetBurgerConstructor())
         dispatch(resetCountIngredients())
+        localStorage.removeItem("buns");
+        localStorage.removeItem("main");
+        }
     }
+
+    useEffect(() => {
+        const storedBun = JSON.parse(localStorage.getItem("buns", bun));
+        const storedMain = JSON.parse(localStorage.getItem("main", main));
+        if (storedBun) {
+            dispatch(setBun(storedBun))
+        }
+        if (storedMain) {
+            dispatch(setMain(storedMain))
+        }
+    }, [])
 
 
     return (
