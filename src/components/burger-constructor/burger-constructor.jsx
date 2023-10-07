@@ -53,7 +53,7 @@ export const BurgerConstructor = () => {
     function sendOrderDetails() {
         const accessToken = localStorage.getItem("accessToken");
         if(!accessToken) {
-            bun && localStorage.setItem("buns", JSON.stringify(bun));
+            bun && localStorage.setItem("bun", JSON.stringify(bun));
             main && localStorage.setItem("main", JSON.stringify(main));
             navigate("/login");
         } else {
@@ -66,13 +66,13 @@ export const BurgerConstructor = () => {
         setOpenModal(true);
         dispatch(resetBurgerConstructor())
         dispatch(resetCountIngredients())
-        localStorage.removeItem("buns");
+        localStorage.removeItem("bun");
         localStorage.removeItem("main");
         }
     }
 
     useEffect(() => {
-        const storedBun = JSON.parse(localStorage.getItem("buns", bun));
+        const storedBun = JSON.parse(localStorage.getItem("bun", bun));
         const storedMain = JSON.parse(localStorage.getItem("main", main));
         if (storedBun) {
             dispatch(setBun(storedBun))

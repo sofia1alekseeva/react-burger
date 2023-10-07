@@ -29,6 +29,8 @@ const ProfileMenu = () => {
     const logout = () => {
         dispatch(logoutThunk())
         dispatch(resetUser())
+        localStorage.removeItem("bun");
+        localStorage.removeItem("main");
         navigate("/login")
     }
 
