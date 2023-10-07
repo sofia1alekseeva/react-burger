@@ -28,8 +28,8 @@ const ProfilePage = () => {
         if (isPasswordFocus) {
             if (typePassword === "password") {
                 setPasswordIcon("ShowIcon")
-            } else { 
-                setPasswordIcon("HideIcon") 
+            } else {
+                setPasswordIcon("HideIcon")
             }
         } else {
             setPasswordIcon("EditIcon")

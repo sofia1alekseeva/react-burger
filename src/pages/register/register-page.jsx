@@ -15,11 +15,11 @@ const RegisterPage = () => {
         navigate("/login")
     }
 
-    const [value, setValue] = useState({name:"", email: "", password: ""});
+    const [value, setValue] = useState({ name: "", email: "", password: "" });
 
     const onChange = (e, type) => {
         e.preventDefault();
-        setValue((prevState) => ({...prevState, [type]: e.target.value}))
+        setValue((prevState) => ({ ...prevState, [type]: e.target.value }))
     }
 
     const onSubmit = async () => {
@@ -34,13 +34,13 @@ const RegisterPage = () => {
 
     return (<form className={styles.mainBlock} onSubmit={onSubmit}>
         <h1 className={`${styles.title} text text_type_main-medium`}>Регистрация</h1>
-        <Input placeholder="Имя" value={value?.name} onChange={(e) => onChange(e, "name")}/>
-        <Input placeholder="E-mail" type="email" value={value?.email} onChange={(e) => onChange(e, "email")}/>
-        <Input placeholder="Пароль" type={typePassword} icon={typePassword === "password" ? "ShowIcon" : "HideIcon"} value={value?.password} onChange={(e) => onChange(e, "password")} onIconClick={onIconClick}/>
+        <Input placeholder="Имя" value={value?.name} onChange={(e) => onChange(e, "name")} />
+        <Input placeholder="E-mail" type="email" value={value?.email} onChange={(e) => onChange(e, "email")} />
+        <Input placeholder="Пароль" type={typePassword} icon={typePassword === "password" ? "ShowIcon" : "HideIcon"} value={value?.password} onChange={(e) => onChange(e, "password")} onIconClick={onIconClick} />
         <Button type="primary" htmlType="submit">Зарегистрироваться</Button>
         <div className={styles.bottomBlock}>
-        <span className={`text text_type_main-default text_color_inactive mr-2`}>Уже зарегистрированы?</span>
-        <Button htmlType="button" type="secondary" onClick={linkToLoginPage} extraClass={styles.loginButton}>Войти</Button>
+            <span className={`text text_type_main-default text_color_inactive mr-2`}>Уже зарегистрированы?</span>
+            <Button htmlType="button" type="secondary" onClick={linkToLoginPage} extraClass={styles.loginButton}>Войти</Button>
         </div>
 
     </form>

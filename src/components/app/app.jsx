@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import AppRoutes from '../app-routes/app-routes';
 import { getIngredientsThunk } from '../../services/reducers/ingredients';
 import { getUserThunk, resetUser } from '../../services/reducers/profile';
-import { error, user } from '../../services/reducers/profile/selectors';
+import { user } from '../../services/reducers/profile/selectors';
 import { loading as loginLoading } from '../../services/reducers/auth/login/selectors';
 import { loading as registerLoading } from '../../services/reducers/auth/register/selectors';
 
@@ -16,7 +16,6 @@ function App() {
   const userData = useSelector(user);
   const loadingLoginStatus = useSelector(loginLoading);
   const loadingRegisterStatus = useSelector(registerLoading);
-  const errorUserData = useSelector(error)
 
   useEffect(() => {
     dispatch(getIngredientsThunk());
