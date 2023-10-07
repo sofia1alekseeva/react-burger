@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { getUserData, updateUserData } from "../../../utils/burger-api";
-
+import { getUserData, updateUserData } from "../../../utils/api/auth";
 
 const initialState = {
   user: null,

@@ -5,7 +5,6 @@ import AppRoutes from '../app-routes/app-routes';
 import { getIngredientsThunk } from '../../services/reducers/ingredients';
 import { getUserThunk, resetUser } from '../../services/reducers/profile';
 import { error, user } from '../../services/reducers/profile/selectors';
-import { updateTokenThunk } from '../../services/reducers/auth/update-token';
 import { loading as loginLoading } from '../../services/reducers/auth/login/selectors';
 import { loading as registerLoading } from '../../services/reducers/auth/register/selectors';
 
@@ -30,14 +29,6 @@ function App() {
     }
 
   }, [dispatch, loadingLoginStatus, accessToken])
-
-  useEffect(() => {
-    if (errorUserData === "jwt expired") {
-      dispatch(updateTokenThunk()).then(() =>
-        dispatch(getUserThunk()));
-
-    }
-  }, [dispatch, errorUserData])
 
   useEffect(
     () => {

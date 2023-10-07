@@ -1,5 +1,5 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "./forgot-password.module.css"
 import { useDispatch } from "react-redux";
 import { useState } from "react";
@@ -12,11 +12,8 @@ const ForgotPasswordPage = () => {
     const [value, setValue] = useState({email: ""});
 
     const onChange = (e, type) => {
+        e.preventDefault();
         setValue((prevState) => ({...prevState, [type]: e.target.value}))
-    }
-
-    const linkToLoginPage = () => {
-        navigate("/login")
     }
 
     const onSubmit = async (e) => {
@@ -31,7 +28,7 @@ const ForgotPasswordPage = () => {
         <Button type="primary" htmlType="submit">Восстановить</Button>
         <div className={styles.bottomBlock}>
         <span className={`text text_type_main-default text_color_inactive mr-2`}>Вспомнили пароль?</span>
-        <Button  htmlType="button" type="secondary" onClick={linkToLoginPage} extraClass={styles.bottomButton}>Войти</Button>
+        <Link to="/login" className={`${styles.bottomLink} text text_type_main-default`}>Войти</Link>
         </div>
 
     </form>

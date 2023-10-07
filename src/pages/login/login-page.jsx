@@ -1,5 +1,5 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./login-page.module.css"
@@ -13,15 +13,6 @@ const LoginPage = () => {
     const loginLoading = useSelector(loading)
     const [value, setValue] = useState({email: "", password: ""});
     const [typePassword, setTypePassword] = useState("password")
-
-
-    const linkToRegistrationPage = () => {
-        navigate("/register")
-    }
-
-    const linkToForgotPasswordPage = () => {
-        navigate("/forgot-password")
-    }
 
 
     const onChange = (e, type) => {
@@ -54,11 +45,11 @@ const LoginPage = () => {
         <div className={styles.bottomBlock}>
         <div className={styles.bottomBlockActions}>
         <span className={`text text_type_main-default text_color_inactive mr-2`}>Вы — новый пользователь?</span>
-        <Button htmlType="button" type="secondary" onClick={linkToRegistrationPage} extraClass={styles.bottomButton}>Зарегистрироваться</Button>
+        <Link to="/register" className={`${styles.bottomLink} text text_type_main-default`}>Зарегистрироваться</Link>
         </div>
         <div className={styles.bottomBlockActions}>
         <span className={`text text_type_main-default text_color_inactive mr-2`} >Забыли пароль?</span>
-        <Button htmlType="button" type="secondary" onClick={linkToForgotPasswordPage} extraClass={styles.bottomButton}>Восстановить пароль</Button>
+        <Link to="/forgot-password" className={`${styles.bottomLink} text text_type_main-default`}>Восстановить пароль</Link>
         </div>
         </div>
 

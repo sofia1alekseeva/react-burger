@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { sendOrderIngredients } from '../../../utils/burger-api';
+import { sendOrderIngredients } from '../../../utils/api';
 
 const initialState = {
     orderDetails: {

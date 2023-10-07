@@ -3,7 +3,7 @@ import ingredientsSlice from './ingredients';
 import ingredientDetailsSlice from './ingredient-details';
 import orderDetailsSlice from './order-details';
 import burgerConstructorSlice from './burger-constructor';
-import { loginSlice, logoutSlice, registerSlice, updateTokenSlice } from './auth';
+import { loginSlice, logoutSlice, registerSlice } from './auth';
 import profileSlice from './profile';
 import forgotPasswordSlice from "./profile/forgot-password"
 import resetPasswordSlice from "./profile/reset-password"
@@ -16,7 +16,6 @@ export const rootReducer = combineReducers({
     loginSlice,
     logoutSlice,
     registerSlice,
-    updateTokenSlice,
     profileSlice,
     forgotPasswordSlice,
     resetPasswordSlice

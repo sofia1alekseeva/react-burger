@@ -1,5 +1,5 @@
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import styles from "./reset-password.module.css"
@@ -32,10 +32,6 @@ const ResetPasswordPage = () => {
         setValue((prevState) => ({...prevState, [type]: e.target.value}))
     }
 
-    const linkToLoginPage = () => {
-        navigate("/login")
-    }
-
     const onSubmit = async (e) => {
         e.preventDefault();
         dispatch(resetPasswordThunk(value))
@@ -49,7 +45,7 @@ const ResetPasswordPage = () => {
         <Button type="primary" htmlType="submit">Сохранить</Button>
         <div className={styles.bottomBlock}>
         <span className={`text text_type_main-default text_color_inactive mr-2`}>Вспомнили пароль?</span>
-        <Button htmlType="button" type="secondary" onClick={linkToLoginPage} extraClass={styles.bottomButton}>Войти</Button>
+        <Link to="/login" className={`${styles.bottomLink} text text_type_main-default`}>Войти</Link>
         </div>
 
     </form>

@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { sendForgotPasswordData } from "../../../../utils/burger-api";
-
+import { sendForgotPasswordData } from "../../../../utils/api";
 
 const initialState = {
     loading: null,
@@ -9,7 +8,7 @@ const initialState = {
 
 export const forgotPasswordThunk = createAsyncThunk(
     'profile/forgotPassword',
-    async (data) => await sendForgotPasswordData(data),
+    sendForgotPasswordData
 );
 
 
@@ -26,9 +25,10 @@ const forgotPasswordSlice = createSlice({
 
         builder.addCase(forgotPasswordThunk.pending, (state) => {
             state.loading = 'pending';
-            state.error = undefined;
+            state.error = initialState.error;
         });
         builder.addCase(forgotPasswordThunk.fulfilled, (state) => {
+            state.error = initialState.error;
             state.loading = 'succeeded';
         });
         builder.addCase(forgotPasswordThunk.rejected, (state, action) => {

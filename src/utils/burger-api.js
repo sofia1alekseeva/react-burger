@@ -7,9 +7,43 @@ const checkResponse = (res) => {
 
 const request = (path, options) => fetch(`${BURGER_API}/${path}`, options).then(checkResponse);
 
+const requestWithRefresh = (path, options) => {
+    fetch(`${BURGER_API}/${path}`, options).then((resp) => {
+        const response = resp.then(r => r.json());
+        console.log("response", response);
+        return response;
+    }
+    ).catch((err) => {
+        console.log("err", err)
+        if (err.message === "jwt expired") {
+            updateTokenData().then(r => {
+                localStorage.setItem('refreshToken', r.refreshToken);
+                localStorage.setItem('accessToken', r.accessToken);
+            });
+            return requestWithRefresh(path, options).then(checkResponse)
+        }
+        return requestWithRefresh(path, options).then(checkResponse)
+    })
+    // fetch(`${BURGER_API}/${path}`, options).then((resp) => {
+    //     const response = resp.json().then(checkResponse);
+    //     console.log("response", response);
+    //     if(response === "jwt expired") {
+    //         updateTokenData().then(r => {
+    //             localStorage.setItem('refreshToken', r.refreshToken);
+    //             localStorage.setItem('accessToken', r.accessToken);
+    //         });
+    //         return requestWithRefresh(path, options).then(checkResponse)
+    //     }
+    //     return requestWithRefresh(path, options).then(checkResponse)
+
+    // })
+
+};
+
+
 export const getIngredients = () => request('ingredients');
 
-export const sendOrderIngredients = (ingredientsIds) => request('orders', {
+export const sendOrderIngredients = (ingredientsIds) => requestWithRefresh('orders', {
     method: 'POST',
     'authorization': localStorage.getItem('accessToken'),
     headers: {
@@ -57,7 +91,7 @@ export const updateTokenData = () => request('auth/token', {
     body: JSON.stringify({ token: localStorage.getItem('refreshToken') })
 })
 
-export const getUserData = () => request('auth/user', {
+export const getUserData = () => requestWithRefresh('auth/user', {
     method: 'GET',
     headers: {
         'authorization': localStorage.getItem('accessToken'),
@@ -66,7 +100,7 @@ export const getUserData = () => request('auth/user', {
     },
 })
 
-export const updateUserData = (data) => request('auth/user', {
+export const updateUserData = (data) => requestWithRefresh('auth/user', {
     method: 'PATCH',
     headers: {
         'authorization': localStorage.getItem('accessToken'),

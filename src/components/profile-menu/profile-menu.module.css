@@ -7,6 +7,7 @@
 .column {
     display: flex;
     flex-direction: column;
+    width: 320px;
 }
 
 .inputs {
@@ -25,13 +26,20 @@
     width: 480px;
 }
 
-.button {
+.link {
     color: #8585AD;
     width: 320px;
     height: 64px;
+    line-height: 64px;
     text-align: start;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-.button.active {
+.link:hover {
+    color: white;
+}
+
+.link.active {
     color: white;
 }

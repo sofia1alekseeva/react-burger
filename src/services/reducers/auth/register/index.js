@@ -1,14 +1,12 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { sendRegistrationData } from "../../../../utils/burger-api";
+import { sendRegistrationData } from "../../../../utils/api";
 
 const initialState = {
     error: "",
     loading: ""
 }
 
-export const registerThunk = createAsyncThunk("auth/register", async (userData) =>
-    await sendRegistrationData(userData)
-);
+export const registerThunk = createAsyncThunk("auth/register", sendRegistrationData);
 
 const registerSlice = createSlice({
     name: "auth/register",

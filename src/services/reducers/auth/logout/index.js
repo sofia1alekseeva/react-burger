@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { sendLogoutData } from "../../../../utils/burger-api";
+import { sendLogoutData } from "../../../../utils/api";
 
 const initialState = {
     error: "",

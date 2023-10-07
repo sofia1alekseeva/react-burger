@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { sendResetPasswordData } from "../../../../utils/burger-api";
-
+import { sendResetPasswordData } from "../../../../utils/api";
 
 const initialState = {
   loading: null,
@@ -8,8 +7,7 @@ const initialState = {
 }
 
 export const resetPasswordThunk = createAsyncThunk(
-  'profile/resetPassword',
-  async (data) => await sendResetPasswordData(data),
+  'profile/resetPassword', sendResetPasswordData,
 );
 
 
