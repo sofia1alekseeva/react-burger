@@ -26,6 +26,7 @@
 
 .caloricItem {
     display: flex;
+    width: 120px;
     flex-direction: column;
     justify-content: center;
 }
@@ -37,5 +38,4 @@
 
 .number {
     margin-top: 8px;
-    font-family: Iceland;
 }

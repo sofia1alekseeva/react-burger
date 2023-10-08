@@ -1,0 +1,14 @@
+.mainBlock {
+    display: flex;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icon {
+    display: flex;
+    box-shadow: 0px 0px 30px 0px #3C39EC;
+    border: 1px solid #3C39EC;
+    border-radius: var(--common-border-radius);
+    margin: 0 auto;
+}
