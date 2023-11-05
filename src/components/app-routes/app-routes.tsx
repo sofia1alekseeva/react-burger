@@ -16,7 +16,7 @@ import { OnlyAuth, OnlyUnAuth } from "../auth-route/auth-route";
 import ProfileMenu from "../profile-menu/profile-menu";
 import OrderFeedPage from "../../pages/order-feed/order-feed-page";
 import OrderFeedModal from "../order-feed-modal/order-feed-modal";
-import OrderFeedItemPage from "../../pages/ order-feed-item-page/order-feed-item-page";
+import OrderFeedItemPage from "../../pages/order-feed-item-page/order-feed-item-page";
 
 const AppRoutes = () => {
   const location = useLocation();

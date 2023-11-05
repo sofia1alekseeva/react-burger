@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { orderFeedDetailsSelector } from "../../services/reducers/orders-feed/selectors";
+import { useAppDispatch } from "../../hooks";
 import styles from "./order-feed-item-page.module.css";
 import { getAllOrdersInfo } from "../../utils/api/orders";
 import { useParams } from "react-router-dom";
@@ -10,7 +9,6 @@ import OrderFeedDetails from "../../components/order-feed-details/order-feed-det
 const OrderFeedItemPage = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const orderFeedItemData = useAppSelector(orderFeedDetailsSelector);
   const [orderNumber, setOrderNumber] = useState(0);
   const getOrderData = async () => {
     const { data } = await getAllOrdersInfo();
