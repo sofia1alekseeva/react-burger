@@ -1,8 +1,8 @@
-
 interface IStatuses {
-    [key: string]: string
+  [key: string]: string;
 }
 export const STATUSES: IStatuses = {
-    "done":  "Выполнен",
-    "pending": "Готовится"
-}
+  done: "Выполнен",
+  pending: "Готовится",
+  created: "Создан"
+};

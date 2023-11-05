@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
 import styles from "./order-feed-details.module.css";
-import { getOrderInfo } from "../../utils/api/orders";
-import { useParams } from "react-router-dom";
 import { orderFeedDetailsSelector } from "../../services/reducers/orders-feed/selectors";
 import { useAppSelector } from "../../hooks";
 import { useOrderIngredients } from "../../hooks/use-order-ingredients";
 import { STATUSES } from "../../utils/constants/statuses";
 import {
   IOrderDetailsIngredientsData,
-  TOrderDetailsData,
 } from "../../interfaces/IOrderFeed";
 import { formatOrderTime } from "../../utils/functions/format-order-time";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
