@@ -1,6 +1,5 @@
 import type { Middleware } from "redux";
-
-import type {  StoreState } from "../../services/index";
+import type { StoreState } from "../../services/index";
 import {
   clearOrdersData,
   setOrdersData,
