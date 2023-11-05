@@ -21,7 +21,6 @@ import OrderFeedItemPage from "../../pages/ order-feed-item-page/order-feed-ite
 const AppRoutes = () => {
   const location = useLocation();
   const background = location?.state?.background;
-  // console.log("state", state);
 
   return (
     <>

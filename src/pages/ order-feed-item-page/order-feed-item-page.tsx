@@ -33,7 +33,6 @@ const OrderFeedItemPage = () => {
   useEffect(() => {
     getOrderData();
   }, []);
-  console.log("orderFeedItemData", orderFeedItemData);
 
   return (
     <div className={`${styles.mainBlock}`}>

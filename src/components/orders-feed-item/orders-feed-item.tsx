@@ -13,7 +13,6 @@ const OrdersFeedItem: FC<{
   const navigate = useNavigate();
   const location = useLocation();
   const onClick = () => {
-    console.log("location.pathname", location.pathname);
     let path: string;
     if (location.pathname === "/feed") {
       path = "/feed";
@@ -57,7 +56,7 @@ const OrdersFeedItem: FC<{
         <div className={`${styles.ingredientsImages}`}>
           {orderFeedItem.ingredientsInfo.map((item, index) => {
             return (
-              <div className={`${styles.ingredientImageBlock}`}>
+              <div className={`${styles.ingredientImageBlock}`} key={index}>
                 <div className={`${styles.ingredientImageRound}`} />
                 <img
                   src={item.image}

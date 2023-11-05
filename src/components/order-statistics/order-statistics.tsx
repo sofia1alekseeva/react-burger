@@ -13,7 +13,6 @@ const OrderStatistics = () => {
     .filter((item) => item.status === "pending")
     .slice(0, 10)
     .map((item) => item.number);
-  console.log("ordersFeedData", ordersFeedData);
   return (
     <div className={`${styles.mainBlock} ml-15`}>
       <div className={`${styles.statusBlocksContainer}`}>

@@ -30,7 +30,6 @@ const OrderFeedDetails = () => {
     }
   }, [orderFeedDetails?.ingredients]);
 
-  console.log("orderFeedDetails", orderFeedDetails);
   return (
     <div className={`${styles.mainBlock} mr-10 ml-10`}>
       <h1 className={`text text_type_main-medium mb-2 mt-5`}>
@@ -42,9 +41,9 @@ const OrderFeedDetails = () => {
       <span className={` text text_type_main-medium`}>Состав:</span>
       <div className={`${styles.ingredientsBlock} custom-scroll mt-6`}>
         {ingredientsData &&
-          ingredientsData.map((item) => {
+          ingredientsData.map((item, index) => {
             return (
-              <div className={`${styles.ingredientBlock} mr-6`}>
+              <div className={`${styles.ingredientBlock} mr-6`} key={index}>
                 <div className={`${styles.ingredientImageNameBlock}`}>
                   <div className={`${styles.ingredientImageBlock}`}>
                     <div className={`${styles.ingredientImageRound}`} />
