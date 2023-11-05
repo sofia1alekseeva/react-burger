@@ -2,15 +2,17 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useEffect, useState } from "react";
 import { Modal } from "../modal/modal";
-import { ordersFeedDataSelector } from "../../services/reducers/orders-feed/selectors";
+import { orderFeedDetailsSelector, ordersFeedDataSelector } from "../../services/reducers/orders-feed/selectors";
 import { getOrderInfo } from "../../utils/api/orders";
-import { setOrderFeedDetails } from "../../services/reducers/orders-feed";
+import { clearOrderFeedDetailsData, setOrderFeedDetails } from "../../services/reducers/orders-feed";
 import OrderFeedDetails from "../order-feed-details/order-feed-details";
+import Loader from "../loader/loader";
 
 const OrderFeedModal = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const ordersFeedData = useAppSelector(ordersFeedDataSelector);
+  const orderFeedDetails = useAppSelector(orderFeedDetailsSelector)
   const [orderNumber, setOrderNumber] = useState(0);
 
   const { id } = useParams();
@@ -29,6 +31,7 @@ const OrderFeedModal = () => {
   }, [id, ordersFeedData, dispatch]);
 
   const handleClose = () => {
+    dispatch(clearOrderFeedDetailsData())
     navigate(-1);
   };
 
@@ -39,7 +42,7 @@ const OrderFeedModal = () => {
       title={`#${orderNumber}`}
       titleExtraClass="text text_type_digits-default"
     >
-      <OrderFeedDetails />
+      {orderFeedDetails ? <OrderFeedDetails /> : <Loader extraClass="mt-30"/>}
     </Modal>
   );
 };

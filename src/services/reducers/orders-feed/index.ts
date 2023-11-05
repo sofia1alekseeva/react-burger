@@ -49,6 +49,9 @@ const ordersFeedSlice = createSlice({
     clearOrdersData: (state) => {
       state.ordersFeedData = null;
     },
+    clearOrderFeedDetailsData: (state) => {
+      state.orderFeedDetails = null;
+    },
   },
 });
 
@@ -59,6 +62,7 @@ export const {
   clearOrdersData,
   wsInit,
   wsClose,
+  clearOrderFeedDetailsData
 } = ordersFeedSlice.actions;
 
 export default ordersFeedSlice.reducer;

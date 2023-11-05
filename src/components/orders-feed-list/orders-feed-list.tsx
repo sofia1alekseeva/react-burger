@@ -5,6 +5,7 @@ import { TOrderFeed, TOrderFeedItemData } from "../../interfaces/IOrderFeed";
 import { ordersFeedDataSelector } from "../../services/reducers/orders-feed/selectors";
 import OrdersFeedItem from "../orders-feed-item/orders-feed-item";
 import styles from "./orders-feed-list.module.css";
+import Loader from "../loader/loader";
 
 const OrdersFeedList = () => {
   const ordersFeedData = useAppSelector(ordersFeedDataSelector);
@@ -13,7 +14,7 @@ const OrdersFeedList = () => {
 
   return (
     <div className={`${styles.mainBlock} custom-scroll`}>
-      {ordersFeedData?.orders?.map((item: TOrderFeed) => {
+      {ordersFeedData ? ordersFeedData?.orders?.map((item: TOrderFeed) => {
         const orderFeedInfo = getOrderFeedItemData(item.ingredients);
         const orderFeedItemInfo: TOrderFeedItemData & TOrderFeed = {
           ...item,
@@ -26,7 +27,9 @@ const OrdersFeedList = () => {
             key={item._id}
           />
         );
-      })}
+      }) : <Loader extraClass="mt-30"/>
+      
+      }
     </div>
   );
 };
