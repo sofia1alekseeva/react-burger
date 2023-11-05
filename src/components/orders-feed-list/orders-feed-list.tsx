@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useAppSelector } from "../../hooks";
-import { useOrderIngredients } from "../../hooks/useOrderIngredients";
+import { useOrderIngredients } from "../../hooks/use-order-ingredients";
 import { TOrderFeed, TOrderFeedItemData } from "../../interfaces/IOrderFeed";
 import { ordersFeedDataSelector } from "../../services/reducers/orders-feed/selectors";
 import OrdersFeedItem from "../orders-feed-item/orders-feed-item";

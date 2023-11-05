@@ -4,7 +4,7 @@ import { getOrderInfo } from "../../utils/api/orders";
 import { useParams } from "react-router-dom";
 import { orderFeedDetailsSelector } from "../../services/reducers/orders-feed/selectors";
 import { useAppSelector } from "../../hooks";
-import { useOrderIngredients } from "../../hooks/useOrderIngredients";
+import { useOrderIngredients } from "../../hooks/use-order-ingredients";
 import { STATUSES } from "../../utils/constants/statuses";
 import {
   IOrderDetailsIngredientsData,
@@ -35,7 +35,11 @@ const OrderFeedDetails = () => {
       <h1 className={`text text_type_main-medium mb-2 mt-5`}>
         {orderFeedDetails?.name}
       </h1>
-      <span className={`text text_type_main-default mb-15 ${orderFeedDetails?.status === 'done' && styles.orderStatusDone}`}>
+      <span
+        className={`text text_type_main-default mb-15 ${
+          orderFeedDetails?.status === "done" && styles.orderStatusDone
+        }`}
+      >
         {STATUSES[`${orderFeedDetails?.status}`]}
       </span>
       <span className={` text text_type_main-medium`}>Состав:</span>
