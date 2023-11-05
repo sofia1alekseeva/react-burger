@@ -3,7 +3,7 @@ import { useState, useMemo, useRef, MutableRefObject } from "react";
 import { BurgerIngredient } from "../burger-ingredient/burger-ingredient";
 import styles from "./burger-ingredients.module.css";
 import * as ingredientsSelector from "../../services/reducers/ingredients/selectors";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { IIngredient } from "../../interfaces/IIngredient";
 import { useAppSelector } from "../../hooks";
 
@@ -19,7 +19,7 @@ const title: ITitle = {
 
 export const BurgerIngredients = () => {
   const navigate = useNavigate();
-
+  const location = useLocation();
   const [current, setCurrent] = useState<string>("bun");
   const ingredients = useAppSelector(ingredientsSelector.ingredients);
   const setTab = (tab: string): void => {
@@ -72,9 +72,9 @@ export const BurgerIngredients = () => {
   };
 
   const openIngredients = (item: IIngredient): void => {
-    navigate(`ingredients/${item._id}`, {
+    navigate(`/ingredients/${item._id}`, {
       state: {
-        isOpenModal: true,
+        background: location,
       },
     });
   };

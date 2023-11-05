@@ -14,16 +14,27 @@ import {
 import IngredientModal from "../ingredient-modal/ingredient-modal";
 import { OnlyAuth, OnlyUnAuth } from "../auth-route/auth-route";
 import ProfileMenu from "../profile-menu/profile-menu";
+import OrderFeedPage from "../../pages/order-feed/order-feed-page";
+import OrderFeedModal from "../order-feed-modal/order-feed-modal";
+import OrderFeedItemPage from "../../pages/ order-feed-item-page/order-feed-item-page";
 
 const AppRoutes = () => {
-  const { state } = useLocation();
+  const location = useLocation();
+  const background = location?.state?.background;
+  // console.log("state", state);
 
   return (
     <>
-      <Routes location={state?.isOpenModal}>
+      <Routes location={background || location}>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
           <Route path="ingredients/:id" element={<IngredientPage />} />
+          <Route path="feed" element={<OrderFeedPage />} />
+          <Route path="feed/:id" element={<OrderFeedItemPage />} />
+          <Route
+            path="profile/orders/:id"
+            element={<OnlyAuth children={<OrderFeedItemPage />} />}
+          />
           <Route
             path="login"
             element={<OnlyUnAuth children={<LoginPage />} />}
@@ -55,9 +66,11 @@ const AppRoutes = () => {
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
-      {state?.isOpenModal && (
+      {background && (
         <Routes>
           <Route path="ingredients/:id" element={<IngredientModal />} />
+          <Route path="feed/:id" element={<OrderFeedModal />} />
+          <Route path="profile/orders/:id" element={<OrderFeedModal />} />
         </Routes>
       )}
     </>

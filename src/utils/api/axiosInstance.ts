@@ -22,26 +22,29 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   (error) => {
     const { response, config } = error;
+    const originalRequest = error.config;
     if (
-      (response.status !== 403 || response.status !== 401) &&
-      response.data.message !== "jwt expired"
+      (response.status === 403 || response.status === 401) &&
+      response.data.message === "jwt expired" &&
+      !originalRequest._isRetry
     ) {
-      return Promise.reject(response.data.message);
+      originalRequest._isRetry = true;
+      const refreshToken = localStorage.getItem("refreshToken");
+      const body: TBody = {
+        token: refreshToken,
+      };
+      return axios
+        .post<TBody, AxiosResponse>("/auth/token", body, options)
+        .then((response) => {
+          localStorage.setItem("accessToken", response.data.accessToken);
+          localStorage.setItem("refreshToken", response.data.refreshToken);
+          return axiosInstance(config);
+        })
+        .catch(() => {
+          return Promise.reject(response.data.message);
+        });
     }
-    const refreshToken = localStorage.getItem("refreshToken");
-    const body: TBody = {
-      token: refreshToken,
-    };
-    return axios
-      .post<TBody, AxiosResponse>("/auth/token", body, options)
-      .then((response) => {
-        localStorage.setItem("accessToken", response.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
-        return axiosInstance(config);
-      })
-      .catch(() => {
-        return Promise.reject(response.data.message);
-      });
+    return Promise.reject(response.data.message);
   }
 );
 

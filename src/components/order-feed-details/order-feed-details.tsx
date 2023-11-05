@@ -1,0 +1,90 @@
+import { useEffect, useState } from "react";
+import styles from "./order-feed-details.module.css";
+import { getOrderInfo } from "../../utils/api/orders";
+import { useParams } from "react-router-dom";
+import { orderFeedDetailsSelector } from "../../services/reducers/orders-feed/selectors";
+import { useAppSelector } from "../../hooks";
+import { useOrderIngredients } from "../../hooks/useOrderIngredients";
+import { STATUSES } from "../../utils/constants/statuses";
+import {
+  IOrderDetailsIngredientsData,
+  TOrderDetailsData,
+} from "../../interfaces/IOrderFeed";
+import { formatOrderTime } from "../../utils/functions/format-order-time";
+import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+
+const OrderFeedDetails = () => {
+  const orderFeedDetails = useAppSelector(orderFeedDetailsSelector);
+  const { getOrderIngredientsTotalData } = useOrderIngredients();
+  const [ingredientsData, setIngredientsData] =
+    useState<Array<IOrderDetailsIngredientsData> | null>(null);
+  const [totalPrice, setTotalPrice] = useState<number>(0);
+
+  useEffect(() => {
+    if (orderFeedDetails?.ingredients) {
+      const orderInfo = getOrderIngredientsTotalData(
+        orderFeedDetails?.ingredients
+      );
+      setIngredientsData(orderInfo.ingredientsInfo);
+      setTotalPrice(orderInfo.totalPrice);
+    }
+  }, [orderFeedDetails?.ingredients]);
+
+  console.log("orderFeedDetails", orderFeedDetails);
+  return (
+    <div className={`${styles.mainBlock} mr-10 ml-10`}>
+       
+      {/* <span
+        className={`${styles.orderNumber} text text_type_digits-default`}
+      >{`#${orderFeedDetails?.number}`}</span> */}
+      <h1 className={`text text_type_main-medium mb-2 mt-5`}>
+        {orderFeedDetails?.name}
+      </h1>
+      <span className={`text text_type_main-default mb-15 ${orderFeedDetails?.status === 'done' && styles.orderStatusDone}`}>
+        {STATUSES[`${orderFeedDetails?.status}`]}
+      </span>
+      <span className={` text text_type_main-medium`}>Состав:</span>
+      <div className={`${styles.ingredientsBlock} custom-scroll mt-6`}>
+        {ingredientsData &&
+          ingredientsData.map((item) => {
+            return (
+              <div className={`${styles.ingredientBlock} mr-6`}>
+                <div className={`${styles.ingredientImageNameBlock}`}>
+                  <div className={`${styles.ingredientImageBlock}`}>
+                    <div className={`${styles.ingredientImageRound}`} />
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className={`${styles.ingredientImage}`}
+                    />
+                  </div>
+                  <span className={`text text_type_main-default`}>
+                    {item.name}
+                  </span>
+                </div>
+                <div className={`${styles.priceBlock}`}>
+                  <span
+                    className={`text text_type_digits-default mr-2`}
+                  >{`${item.count} x ${item.price}`}</span>
+                  <CurrencyIcon type="primary" />
+                </div>
+              </div>
+            );
+          })}
+      </div>
+      <div className={`${styles.bottomBlock}`}>
+        <span className={`text text_type_main-default text_color_inactive`}>
+          {formatOrderTime(orderFeedDetails?.createdAt)}
+        </span>
+        <div className={`${styles.priceBlock}`}>
+          <span className={`text text_type_digits-default mr-2`}>
+            {totalPrice}
+          </span>
+          <CurrencyIcon type="primary" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default OrderFeedDetails;

@@ -7,6 +7,7 @@ import { loginSlice, logoutSlice, registerSlice } from "./auth";
 import profileSlice from "./profile";
 import forgotPasswordSlice from "./profile/forgot-password";
 import resetPasswordSlice from "./profile/reset-password";
+import ordersFeedSlice from "./orders-feed";
 
 export const rootReducer = combineReducers({
   ingredientsSlice,
@@ -19,4 +20,5 @@ export const rootReducer = combineReducers({
   profileSlice,
   forgotPasswordSlice,
   resetPasswordSlice,
+  ordersFeedSlice
 });

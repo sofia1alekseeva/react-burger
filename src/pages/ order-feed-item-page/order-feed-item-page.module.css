@@ -1,0 +1,11 @@
+.mainBlock {
+    display: flex;
+    width: 640px;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 120px;
+}
+
+.orderNumber {
+    text-align: center;
+}

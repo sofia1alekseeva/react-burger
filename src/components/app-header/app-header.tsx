@@ -41,8 +41,8 @@ export const AppHeader = () => {
           icon={<BurgerIcon type="primary" />}
         />
         <AppHeaderLink
-          to="/"
-          isActive={active === "/lenta"}
+          to="/feed"
+          isActive={active.includes("/feed")}
           text="Лента Заказов"
           icon={<ListIcon type="primary" />}
         />

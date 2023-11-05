@@ -23,9 +23,7 @@ const IngredientModal = () => {
   }, [id, ingredients, dispatch]);
 
   const handleClose = () => {
-    const copiedState = { ...location.state };
-    delete copiedState.isOpenModal;
-    navigate("/", { state: copiedState });
+    navigate(-1);
   };
 
   return (
