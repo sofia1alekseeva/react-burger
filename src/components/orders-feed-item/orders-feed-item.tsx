@@ -1,12 +1,6 @@
 import { FC } from "react";
 import styles from "./orders-feed-item.module.css";
-import {
-  TOrderFeed,
-  TOrderFeedItemData,
-  TOrdersFeed,
-} from "../../interfaces/IOrderFeed";
-import { useAppSelector } from "../../hooks";
-import { useOrderIngredients } from "../../hooks/useOrderIngredients";
+import { TOrderFeed, TOrderFeedItemData } from "../../interfaces/IOrderFeed";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { formatOrderTime } from "../../utils/functions/format-order-time";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -16,7 +10,6 @@ const OrdersFeedItem: FC<{
   orderFeedItem: TOrderFeedItemData & TOrderFeed;
   isShowStatus: boolean;
 }> = ({ orderFeedItem, isShowStatus }) => {
-  // console.log('ingredientDetails', ingredientDetails)
   const navigate = useNavigate();
   const location = useLocation();
   const onClick = () => {
@@ -49,18 +42,16 @@ const OrdersFeedItem: FC<{
         </span>
       </div>
       <div className={`${styles.nameStatusBlock}`}>
-      <h1 className={`text text_type_main-medium`}>
-        {orderFeedItem.name}
-      </h1>
-      {isShowStatus && (
-        <span
-          className={`${
-            orderFeedItem?.status === "done" && styles.orderStatusDone
-          }`}
-        >
-          {STATUSES[`${orderFeedItem.status}`]}
-        </span>
-      )}
+        <h1 className={`text text_type_main-medium`}>{orderFeedItem.name}</h1>
+        {isShowStatus && (
+          <span
+            className={`${
+              orderFeedItem?.status === "done" && styles.orderStatusDone
+            }`}
+          >
+            {STATUSES[`${orderFeedItem.status}`]}
+          </span>
+        )}
       </div>
       <div className={`${styles.bottomBlock}`}>
         <div className={`${styles.ingredientsImages}`}>

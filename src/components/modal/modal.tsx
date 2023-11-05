@@ -49,7 +49,9 @@ export const Modal: FC<PropsWithChildren<IModelProps>> = ({
       <ModalOverlay active={active} setActive={setActive}>
         <div className={styles.mainBlock} onClick={(e) => e.stopPropagation()}>
           <div className={`${styles.wrapper}`}>
-            <p className={`${styles.title} text text_type_main-large ${titleExtraClass}`}>
+            <p
+              className={`${styles.title} text text_type_main-large ${titleExtraClass}`}
+            >
               {title}
             </p>
             <div className={styles.closeIcon}>

@@ -65,7 +65,7 @@
   transform: translate(-50%, -50%);
 }
 .imageOverlay {
-    opacity: 0.6;
+  opacity: 0.6;
 }
 
 .nextCount {
@@ -76,16 +76,16 @@
 }
 
 .priceBlock {
-    display: flex;
-    flex-direction: flex-end;
-    align-items: center;
+  display: flex;
+  flex-direction: flex-end;
+  align-items: center;
 }
 
 .nameStatusBlock {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 .orderStatusDone {
-    color: #0CC;
+  color: #0cc;
 }

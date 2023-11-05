@@ -1,45 +1,45 @@
 .mainBlock {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
 }
 
 .column {
-    display: flex;
-    flex-direction: column;
-    width: 320px;
+  display: flex;
+  flex-direction: column;
+  width: 320px;
 }
 
 .inputs {
-    gap: 24px;
+  gap: 24px;
 }
 
 .description {
-    width: 320px;
-    height: 64px;
-    color: #8585AD;
-    opacity: 0.4;
+  width: 320px;
+  height: 64px;
+  color: #8585ad;
+  opacity: 0.4;
 }
 
 .secondBlock {
-    display: flex;
-    width: 480px;
+  display: flex;
+  width: 480px;
 }
 
 .link {
-    color: #8585AD;
-    width: 320px;
-    height: 64px;
-    line-height: 64px;
-    text-align: start;
-    text-decoration: none;
-    transition: 0.3s;
+  color: #8585ad;
+  width: 320px;
+  height: 64px;
+  line-height: 64px;
+  text-align: start;
+  text-decoration: none;
+  transition: 0.3s;
 }
 
 .link:hover {
-    color: white;
+  color: white;
 }
 
 .link.active {
-    color: white;
+  color: white;
 }

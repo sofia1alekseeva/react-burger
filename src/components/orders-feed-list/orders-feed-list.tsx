@@ -8,16 +8,13 @@ import styles from "./orders-feed-list.module.css";
 
 const OrdersFeedList = () => {
   const ordersFeedData = useAppSelector(ordersFeedDataSelector);
-  const { getOrderFeedInfo } = useOrderIngredients();
+  const { getOrderFeedItemData } = useOrderIngredients();
   const location = useLocation();
 
-  // const {} = getOrderFeedInfo(ordersFeedData?.orders)
-  // console.log("ordersFeedData", ordersFeedData);
-  console.log("location.pathname", location.pathname);
   return (
     <div className={`${styles.mainBlock} custom-scroll`}>
       {ordersFeedData?.orders?.map((item: TOrderFeed) => {
-        const orderFeedInfo = getOrderFeedInfo(item.ingredients);
+        const orderFeedInfo = getOrderFeedItemData(item.ingredients);
         const orderFeedItemInfo: TOrderFeedItemData & TOrderFeed = {
           ...item,
           ...orderFeedInfo,

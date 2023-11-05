@@ -28,8 +28,6 @@ export const useOrderIngredients = () => {
     if (buns[0]) {
       sortedIngredients.unshift(buns[0]);
     }
-    // console.log('sortedOrderInfo', sortedOrderInfo)
-    // console.log("sortedOrderInfo", sortedOrderInfo);
     return sortedIngredients as Array<ICountIngredient>;
   };
 
@@ -93,7 +91,7 @@ export const useOrderIngredients = () => {
   };
 
   return {
-    getOrderFeedInfo: getOrderFeedItemData,
+    getOrderFeedItemData,
     getOrderIngredientsTotalData,
   };
 };

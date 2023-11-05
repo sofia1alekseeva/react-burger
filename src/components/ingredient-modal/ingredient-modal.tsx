@@ -1,4 +1,4 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IngredientDetails } from "../ingredient-details/ingredient-details";
 import { Modal } from "../modal/modal";
 import { useEffect } from "react";
@@ -9,7 +9,6 @@ import { useAppDispatch, useAppSelector } from "../../hooks";
 
 const IngredientModal = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const dispatch = useAppDispatch();
   const ingredients = useAppSelector(ingredientsSelector.ingredients);
   const { id } = useParams();

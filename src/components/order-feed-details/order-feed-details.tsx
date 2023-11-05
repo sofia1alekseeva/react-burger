@@ -33,10 +33,6 @@ const OrderFeedDetails = () => {
   console.log("orderFeedDetails", orderFeedDetails);
   return (
     <div className={`${styles.mainBlock} mr-10 ml-10`}>
-       
-      {/* <span
-        className={`${styles.orderNumber} text text_type_digits-default`}
-      >{`#${orderFeedDetails?.number}`}</span> */}
       <h1 className={`text text_type_main-medium mb-2 mt-5`}>
         {orderFeedDetails?.name}
       </h1>
