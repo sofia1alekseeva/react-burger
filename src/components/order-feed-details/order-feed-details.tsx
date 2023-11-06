@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
 import styles from "./order-feed-details.module.css";
-import { orderFeedDetailsSelector } from "../../services/reducers/orders-feed/selectors";
+import * as orderFeedDetailsSelector from "../../services/reducers/order-feed-details/selectors";
 import { useAppSelector } from "../../hooks";
 import { useOrderIngredients } from "../../hooks/use-order-ingredients";
 import { STATUSES } from "../../utils/constants/statuses";
-import {
-  IOrderDetailsIngredientsData,
-} from "../../interfaces/IOrderFeed";
+import { IOrderDetailsIngredientsData } from "../../interfaces/IOrderFeed";
 import { formatOrderTime } from "../../utils/functions/format-order-time";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const OrderFeedDetails = () => {
-  const orderFeedDetails = useAppSelector(orderFeedDetailsSelector);
+  const orderFeedDetails = useAppSelector(orderFeedDetailsSelector.orderFeedDetails);
   const { getOrderIngredientsTotalData } = useOrderIngredients();
   const [ingredientsData, setIngredientsData] =
     useState<Array<IOrderDetailsIngredientsData> | null>(null);

@@ -53,7 +53,7 @@ export const useOrderIngredients = () => {
   const getOrderDetailsIngredientsData = (
     ingredientsData: Array<ICountIngredient>
   ): IOrderDetailsIngredientsData[] => {
-    return ingredientsData.map((ingredient) => {
+     const newIngredientsData =  ingredientsData.map((ingredient) => {
       return {
         image: ingredient.image_mobile,
         name: ingredient.name,
@@ -61,7 +61,13 @@ export const useOrderIngredients = () => {
         count: ingredientsData.filter((item) => item._id === ingredient._id)
           .length,
       };
-    });
+    })
+    return newIngredientsData.reduce((o: IOrderDetailsIngredientsData[], i:IOrderDetailsIngredientsData) => {
+      if (!o.find((v) => v.name === i.name)) {
+        o.push(i);
+      }
+      return o;
+    }, []);
   };
 
   const getOrderFeedItemData = (

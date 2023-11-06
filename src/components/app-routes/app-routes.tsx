@@ -27,11 +27,11 @@ const AppRoutes = () => {
       <Routes location={background || location}>
         <Route path="/" element={<Layout />}>
           <Route index element={<MainPage />} />
-          <Route path="ingredients/:id" element={<IngredientPage />} />
+          <Route path="ingredients/:number" element={<IngredientPage />} />
           <Route path="feed" element={<OrderFeedPage />} />
-          <Route path="feed/:id" element={<OrderFeedItemPage />} />
+          <Route path="feed/:number" element={<OrderFeedItemPage />} />
           <Route
-            path="profile/orders/:id"
+            path="profile/orders/:number"
             element={<OnlyAuth children={<OrderFeedItemPage />} />}
           />
           <Route
@@ -67,9 +67,9 @@ const AppRoutes = () => {
       </Routes>
       {background && (
         <Routes>
-          <Route path="ingredients/:id" element={<IngredientModal />} />
-          <Route path="feed/:id" element={<OrderFeedModal />} />
-          <Route path="profile/orders/:id" element={<OrderFeedModal />} />
+          <Route path="ingredients/:number" element={<IngredientModal />} />
+          <Route path="feed/:number" element={<OrderFeedModal />} />
+          <Route path="profile/orders/:number" element={<OrderFeedModal />} />
         </Routes>
       )}
     </>

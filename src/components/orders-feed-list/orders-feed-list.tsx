@@ -14,7 +14,7 @@ const OrdersFeedList = () => {
 
   return (
     <div className={`${styles.mainBlock} custom-scroll`}>
-      {ordersFeedData ? ordersFeedData?.orders?.map((item: TOrderFeed) => {
+      {ordersFeedData ? ordersFeedData?.orders?.map((item) => {
         const orderFeedInfo = getOrderFeedItemData(item.ingredients);
         const orderFeedItemInfo: TOrderFeedItemData & TOrderFeed = {
           ...item,

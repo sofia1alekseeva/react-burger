@@ -1,37 +1,35 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Modal } from "../modal/modal";
-import { orderFeedDetailsSelector, ordersFeedDataSelector } from "../../services/reducers/orders-feed/selectors";
-import { getOrderInfo } from "../../utils/api/orders";
-import { clearOrderFeedDetailsData, setOrderFeedDetails } from "../../services/reducers/orders-feed";
+import * as orderFeedDetailsSelector from "../../services/reducers/order-feed-details/selectors";
+import { getOrderFeedDetails } from "../../utils/api/orders";
+import {
+  clearOrderFeedDetailsData,
+  setOrderFeedDetails,
+} from "../../services/reducers/order-feed-details";
 import OrderFeedDetails from "../order-feed-details/order-feed-details";
 import Loader from "../loader/loader";
 
 const OrderFeedModal = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const ordersFeedData = useAppSelector(ordersFeedDataSelector);
-  const orderFeedDetails = useAppSelector(orderFeedDetailsSelector)
-  const [orderNumber, setOrderNumber] = useState(0);
+  const loading = useAppSelector(orderFeedDetailsSelector.loading);
+  const isLoading: boolean = loading === "pending";
 
-  const { id } = useParams();
+  const { number } = useParams();
   useEffect(() => {
-    if (id && ordersFeedData) {
-      const order = ordersFeedData?.orders.find((item) => item._id === id);
-      if (order?.number) {
-        setOrderNumber(order?.number);
-        getOrderInfo(order?.number)
-          .then((data: any) => dispatch(setOrderFeedDetails(data)))
-          .catch((err) => {
-            throw new Error(err);
-          });
-      }
+    if (number) {
+      getOrderFeedDetails(number)
+        .then((data: any) => dispatch(setOrderFeedDetails(data)))
+        .catch((err) => {
+          throw new Error(err);
+        });
     }
-  }, [id, ordersFeedData, dispatch]);
+  }, [number, dispatch]);
 
   const handleClose = () => {
-    dispatch(clearOrderFeedDetailsData())
+    dispatch(clearOrderFeedDetailsData());
     navigate(-1);
   };
 
@@ -39,10 +37,10 @@ const OrderFeedModal = () => {
     <Modal
       active={true}
       setActive={handleClose}
-      title={`#${orderNumber}`}
+      title={`#${number}`}
       titleExtraClass="text text_type_digits-default"
     >
-      {orderFeedDetails ? <OrderFeedDetails /> : <Loader extraClass="mt-30"/>}
+      {isLoading ? <Loader extraClass="mt-30" /> : <OrderFeedDetails />}
     </Modal>
   );
 };

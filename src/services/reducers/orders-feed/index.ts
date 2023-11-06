@@ -3,7 +3,6 @@ import { TOrderFeed, TOrdersFeed } from "../../../interfaces/IOrderFeed";
 
 export interface IInitialState {
   ordersFeedData: TOrdersFeed | null;
-  orderFeedDetails: TOrderFeed | null;
   isSocket: boolean;
   socketUrl: string;
   error?: string;
@@ -11,7 +10,6 @@ export interface IInitialState {
 
 const initialState: IInitialState = {
   ordersFeedData: null,
-  orderFeedDetails: null,
   isSocket: false,
   socketUrl: "",
   error: undefined,
@@ -43,14 +41,8 @@ const ordersFeedSlice = createSlice({
         ),
       };
     },
-    setOrderFeedDetails: (state, action) => {
-      state.orderFeedDetails = action.payload?.data.orders[0];
-    },
     clearOrdersData: (state) => {
       state.ordersFeedData = null;
-    },
-    clearOrderFeedDetailsData: (state) => {
-      state.orderFeedDetails = null;
     },
   },
 });
@@ -58,11 +50,9 @@ const ordersFeedSlice = createSlice({
 export const {
   clearOrdersError,
   setOrdersData,
-  setOrderFeedDetails,
   clearOrdersData,
   wsInit,
   wsClose,
-  clearOrderFeedDetailsData
 } = ordersFeedSlice.actions;
 
 export default ordersFeedSlice.reducer;

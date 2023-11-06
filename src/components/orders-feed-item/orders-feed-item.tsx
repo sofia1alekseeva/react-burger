@@ -21,7 +21,7 @@ const OrdersFeedItem: FC<{
     } else {
       path = "/";
     }
-    navigate(`${path}/${orderFeedItem._id}`, {
+    navigate(`${path}/${orderFeedItem.number}`, {
       state: { background: location },
     });
   };

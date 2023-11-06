@@ -1,43 +1,40 @@
-import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../hooks";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../hooks";
 import styles from "./order-feed-item-page.module.css";
-import { getAllOrdersInfo } from "../../utils/api/orders";
+import { getOrderFeedDetails } from "../../utils/api/orders";
 import { useParams } from "react-router-dom";
-import { setOrderFeedDetails } from "../../services/reducers/orders-feed";
+import {
+  getOrderFeedDetailsThunk,
+  setOrderFeedDetails,
+} from "../../services/reducers/order-feed-details";
 import OrderFeedDetails from "../../components/order-feed-details/order-feed-details";
+import * as orderFeedDetailsSelector from "../../services/reducers/order-feed-details/selectors";
+import Loader from "../../components/loader/loader";
 
 const OrderFeedItemPage = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams();
-  const [orderNumber, setOrderNumber] = useState(0);
-  const getOrderData = async () => {
-    const { data } = await getAllOrdersInfo();
-    if (data.orders) {
-      const orderData = {
-        data: {
-          ...data,
-          orders: [
-            data?.orders.find((item) => {
-              setOrderNumber(item.number);
-              return item._id === id;
-            }),
-          ],
-        },
-      };
-      dispatch(setOrderFeedDetails(orderData));
-    }
-  };
+  const loading = useAppSelector(orderFeedDetailsSelector.loading);
+  const isLoading: boolean = loading === "pending";
+  const { number } = useParams();
 
   useEffect(() => {
-    getOrderData();
-  }, []);
+    if (number) {
+      dispatch(getOrderFeedDetailsThunk(number));
+    }
+  }, [number, dispatch]);
 
   return (
     <div className={`${styles.mainBlock}`}>
-      <span
-        className={`${styles.orderNumber} text text_type_digits-default`}
-      >{`#${orderNumber}`}</span>
-      <OrderFeedDetails />
+      {isLoading ? (
+        <Loader extraClass="mt-30"/>
+      ) : (
+        <>
+          <span
+            className={`${styles.orderNumber} text text_type_digits-default`}
+          >{`#${number}`}</span>
+          <OrderFeedDetails />
+        </>
+      )}
     </div>
   );
 };
