@@ -3,9 +3,9 @@ import * as ingredientsSelector from "../services/reducers/ingredients/selectors
 import { ICountIngredient } from "../services/reducers/ingredients";
 import {
   TOrderDetailsData,
-  IOrderDetailsIngredientsData,
+  TOrderDetailsIngredientsData,
   TOrderFeedItemData,
-  IOrdersFeedItemIngredientsData,
+  TOrdersFeedItemIngredientsData,
 } from "../interfaces/IOrderFeed";
 
 export const useOrderIngredients = () => {
@@ -38,7 +38,7 @@ export const useOrderIngredients = () => {
 
   const getOrderFeedItemIngredientsData = (
     ingredientsData: Array<ICountIngredient>
-  ): IOrdersFeedItemIngredientsData[] => {
+  ): TOrdersFeedItemIngredientsData[] => {
     const hiddenIngredientsNumber: number | null =
       ingredientsData.length >= 6 ? ingredientsData.length - 5 : null;
     ingredientsData = ingredientsData.slice(0, 6);
@@ -52,18 +52,19 @@ export const useOrderIngredients = () => {
   };
   const getOrderDetailsIngredientsData = (
     ingredientsData: Array<ICountIngredient>
-  ): IOrderDetailsIngredientsData[] => {
+  ): Array<TOrderDetailsIngredientsData & {type: string}> => {
      const newIngredientsData =  ingredientsData.map((ingredient) => {
       return {
         image: ingredient.image_mobile,
         name: ingredient.name,
         price: ingredient.price,
-        count: ingredientsData.filter((item) => item._id === ingredient._id)
+        count: ingredient.type === 'bun' ? 1 : ingredientsData.filter((item) => item._id === ingredient._id)
           .length,
+          type: ingredient.type
       };
     })
-    return newIngredientsData.reduce((o: IOrderDetailsIngredientsData[], i:IOrderDetailsIngredientsData) => {
-      if (!o.find((v) => v.name === i.name)) {
+    return newIngredientsData.reduce((o: Array<TOrderDetailsIngredientsData & {type: string}>, i:TOrderDetailsIngredientsData & {type: string}) => {
+      if (!o.find((v) => v.name === i.name && v.type !== 'bun')) {
         o.push(i);
       }
       return o;

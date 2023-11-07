@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "../../hooks";
 import styles from "./orders-history-page.module.css";
-import { wsClose, wsInit } from "../../services/reducers/orders-feed";
+import {
+  wsOrdersClose,
+  wsOrdersInit,
+} from "../../services/reducers/orders-feed";
 import OrdersFeedList from "../../components/orders-feed-list/orders-feed-list";
 
 const ProfileOrdersFeedPage = () => {
@@ -15,14 +18,14 @@ const ProfileOrdersFeedPage = () => {
   };
   useEffect(() => {
     dispatch(
-      wsInit(
+      wsOrdersInit(
         `wss://norma.nomoreparties.space/orders?token=${sliceToken(
           accessToken
         )}`
       )
     );
     return () => {
-      dispatch(wsClose());
+      dispatch(wsOrdersClose());
     };
   }, []);
   return (

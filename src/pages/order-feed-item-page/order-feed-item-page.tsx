@@ -1,12 +1,8 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import styles from "./order-feed-item-page.module.css";
-import { getOrderFeedDetails } from "../../utils/api/orders";
 import { useParams } from "react-router-dom";
-import {
-  getOrderFeedDetailsThunk,
-  setOrderFeedDetails,
-} from "../../services/reducers/order-feed-details";
+import { getOrderFeedDetailsThunk } from "../../services/reducers/order-feed-details";
 import OrderFeedDetails from "../../components/order-feed-details/order-feed-details";
 import * as orderFeedDetailsSelector from "../../services/reducers/order-feed-details/selectors";
 import Loader from "../../components/loader/loader";
@@ -26,7 +22,7 @@ const OrderFeedItemPage = () => {
   return (
     <div className={`${styles.mainBlock}`}>
       {isLoading ? (
-        <Loader extraClass="mt-30"/>
+        <Loader extraClass="mt-30" />
       ) : (
         <>
           <span

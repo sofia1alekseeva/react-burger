@@ -12,22 +12,26 @@ const initialState: IInitialState = {
   ordersFeedData: null,
   isSocket: false,
   socketUrl: "",
-  error: undefined,
+  error: "",
 };
 
 const ordersFeedSlice = createSlice({
   name: "ordersFeed",
   initialState: initialState,
   reducers: {
-    wsInit: (state, action) => {
+    wsOrdersInit: (state, action) => {
       state.socketUrl = action.payload;
     },
-    wsClose: (state) => {
+    wsOrdersClose: (state) => {
       state.isSocket = false;
       state.ordersFeedData = null;
+      state.error = undefined;
     },
-    wsOpen: (state) => {
+    wsOrdersOpen: (state) => {
       state.isSocket = true;
+    },
+    wsOrdersError: (state, action) => {
+      state.error = action.payload;
     },
     clearOrdersError: (state) => {
       state.error = undefined;
@@ -40,6 +44,7 @@ const ordersFeedSlice = createSlice({
             new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
         ),
       };
+      state.error = undefined;
     },
     clearOrdersData: (state) => {
       state.ordersFeedData = null;
@@ -51,8 +56,9 @@ export const {
   clearOrdersError,
   setOrdersData,
   clearOrdersData,
-  wsInit,
-  wsClose,
+  wsOrdersInit,
+  wsOrdersClose,
+  wsOrdersError,
 } = ordersFeedSlice.actions;
 
 export default ordersFeedSlice.reducer;

@@ -4,15 +4,17 @@ import * as orderFeedDetailsSelector from "../../services/reducers/order-feed-de
 import { useAppSelector } from "../../hooks";
 import { useOrderIngredients } from "../../hooks/use-order-ingredients";
 import { STATUSES } from "../../utils/constants/statuses";
-import { IOrderDetailsIngredientsData } from "../../interfaces/IOrderFeed";
+import { TOrderDetailsIngredientsData } from "../../interfaces/IOrderFeed";
 import { formatOrderTime } from "../../utils/functions/format-order-time";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const OrderFeedDetails = () => {
-  const orderFeedDetails = useAppSelector(orderFeedDetailsSelector.orderFeedDetails);
+  const orderFeedDetails = useAppSelector(
+    orderFeedDetailsSelector.orderFeedDetails
+  );
   const { getOrderIngredientsTotalData } = useOrderIngredients();
   const [ingredientsData, setIngredientsData] =
-    useState<Array<IOrderDetailsIngredientsData> | null>(null);
+    useState<Array<TOrderDetailsIngredientsData> | null>(null);
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {

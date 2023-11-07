@@ -40,7 +40,11 @@ axiosInstance.interceptors.response.use(
           localStorage.setItem("refreshToken", response.data.refreshToken);
           return axiosInstance(config);
         })
-        .catch(() => {
+        .catch((err) => {
+          if (err.response.data.message === "Token is invalid") {
+            localStorage.removeItem("refreshToken");
+            localStorage.removeItem("accessToken");
+          }
           return Promise.reject(response.data.message);
         });
     }
