@@ -52,19 +52,18 @@ export const useOrderIngredients = () => {
   };
   const getOrderDetailsIngredientsData = (
     ingredientsData: Array<ICountIngredient>
-  ): Array<TOrderDetailsIngredientsData & {type: string}> => {
+  ): Array<TOrderDetailsIngredientsData> => {
      const newIngredientsData =  ingredientsData.map((ingredient) => {
       return {
         image: ingredient.image_mobile,
         name: ingredient.name,
         price: ingredient.price,
-        count: ingredient.type === 'bun' ? 1 : ingredientsData.filter((item) => item._id === ingredient._id)
-          .length,
-          type: ingredient.type
+        count: ingredientsData.filter((item) => item._id === ingredient._id)
+          .length
       };
     })
-    return newIngredientsData.reduce((o: Array<TOrderDetailsIngredientsData & {type: string}>, i:TOrderDetailsIngredientsData & {type: string}) => {
-      if (!o.find((v) => v.name === i.name && v.type !== 'bun')) {
+    return newIngredientsData.reduce((o: Array<TOrderDetailsIngredientsData>, i:TOrderDetailsIngredientsData) => {
+      if (!o.find((v) => v.name === i.name)) {
         o.push(i);
       }
       return o;
