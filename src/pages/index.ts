@@ -5,7 +5,7 @@ import IngredientPage from "./ingredient/ingredient-page";
 import RegisterPage from "./register/register-page";
 import ResetPasswordPage from "./reset-password/reset-password-page";
 import ProfilePage from "./profile/profile-page";
-import OrdersHistoryPage from "./orders-history/orders-history-page";
+import ProfileOrdersFeedPage from "./profile-orders-feed-page/profile-orders-feed-page";
 import ForgotPasswordPage from "./forgot-password/forgot-password";
 
 export {
@@ -17,5 +17,5 @@ export {
   ForgotPasswordPage,
   ResetPasswordPage,
   ProfilePage,
-  OrdersHistoryPage as OrdersPage,
+  ProfileOrdersFeedPage as OrdersPage,
 };

@@ -1,0 +1,8 @@
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  min-width: 584px;
+  max-height: calc(100vh - 200px);
+  gap: 16px;
+}

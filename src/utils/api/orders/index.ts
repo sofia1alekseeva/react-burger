@@ -1,6 +1,7 @@
 import { AxiosResponse } from "axios";
 import api from "../axiosInstance";
 import { IOrderDetails } from "../../../interfaces/IOrderDetails";
+import { TOrderFeed, TOrdersFeed } from "../../../interfaces/IOrderFeed";
 
 export const sendOrderIngredients = (
   ingredientsIds: Array<string>
@@ -16,3 +17,11 @@ export const sendOrderIngredients = (
       },
     }
   );
+
+export const getAllOrdersData = (): Promise<AxiosResponse<TOrdersFeed, any>> =>
+  api.get("/orders/all");
+
+export const getOrderFeedDetails = (
+  orderNumber: string
+): Promise<AxiosResponse<TOrdersFeed, any>> =>
+  api.get(`/orders/${orderNumber}`);

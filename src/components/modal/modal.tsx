@@ -15,6 +15,7 @@ interface IModelProps {
   setActive: Dispatch<SetStateAction<boolean>>;
   title?: string;
   onClose?: Function;
+  titleExtraClass?: string;
 }
 
 export const Modal: FC<PropsWithChildren<IModelProps>> = ({
@@ -23,6 +24,7 @@ export const Modal: FC<PropsWithChildren<IModelProps>> = ({
   title,
   children,
   onClose,
+  titleExtraClass,
 }) => {
   useEffect(() => {
     if (!active) return;
@@ -47,7 +49,9 @@ export const Modal: FC<PropsWithChildren<IModelProps>> = ({
       <ModalOverlay active={active} setActive={setActive}>
         <div className={styles.mainBlock} onClick={(e) => e.stopPropagation()}>
           <div className={`${styles.wrapper}`}>
-            <p className={`${styles.title} text text_type_main-large`}>
+            <p
+              className={`${styles.title} text text_type_main-large ${titleExtraClass}`}
+            >
               {title}
             </p>
             <div className={styles.closeIcon}>

@@ -1,0 +1,91 @@
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-radius: 40px;
+  border: none;
+  background: #1c1c21;
+  cursor: pointer;
+}
+
+.topBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bottomBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.ingredientsImages {
+  display: flex;
+  transform: rotate(180deg);
+}
+
+.ingredientImageBlock {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-image: linear-gradient(to left, #4c4cff, #801ab3);
+  margin-left: -16px;
+  z-index: 1;
+  transform: rotate(180deg);
+}
+
+.ingredientImageBlock:first-of-type {
+  margin-left: 0px;
+}
+
+.ingredientImageRound {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  left: 50%;
+  background: var(--background-alt);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ingredientImage {
+  border-radius: 50%;
+  box-sizing: border-box;
+  width: 112px;
+  height: 56px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.imageOverlay {
+  opacity: 0.6;
+}
+
+.nextCount {
+  margin: 0 auto;
+  text-align: center;
+  z-index: 1;
+  font-size: 22px;
+}
+
+.priceBlock {
+  display: flex;
+  flex-direction: flex-end;
+  align-items: center;
+}
+
+.nameStatusBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.orderStatusDone {
+  color: #0cc;
+}

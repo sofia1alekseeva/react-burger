@@ -1,0 +1,77 @@
+.mainBlock {
+  display: flex;
+  flex-direction: column;
+  width: 640px;
+}
+
+.orderStatusDone {
+    color: #0CC;
+}
+
+.ingredientsBlock {
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  width: 640px;
+  max-height: 312px;
+  gap: 16px;
+}
+
+.ingredientBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.ingredientImageNameBlock {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.ingredientImageBlock {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-image: linear-gradient(to left, #4c4cff, #801ab3);
+  z-index: 1;
+}
+
+.ingredientImageRound {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  top: 50%;
+  left: 50%;
+  background: var(--background-alt);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.ingredientImage {
+  border-radius: 50%;
+  box-sizing: border-box;
+  width: 112px;
+  height: 56px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bottomBlock {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+  margin-bottom: 40px;
+}
+
+.priceBlock {
+  display: flex;
+  align-items: center;
+}
