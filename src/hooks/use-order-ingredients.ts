@@ -14,12 +14,12 @@ export const useOrderIngredients = () => {
   const getIngredientsData = (
     ingredientsIds: string[]
   ): Array<ICountIngredient> => {
-    const orderIngredients = ingredientsIds.map((id) =>
-      ingredients.find((ingredient) => id === ingredient._id)
+    const orderIngredients:Array<ICountIngredient> = ingredientsIds.map((id) =>
+      ingredients.filter((ingredient) => id === ingredient._id)[0]
     );
-    const buns = orderIngredients.filter((item) => item?.type === "bun");
+    const buns = orderIngredients.filter((item) => item.type === "bun");
     const otherIngredients = orderIngredients.filter(
-      (item) => item?.type !== "bun"
+      (item) => item.type !== "bun"
     );
     let sortedIngredients = [...otherIngredients];
     if (buns[1]) {

@@ -44,7 +44,6 @@ const orderFeedDetailsSlice = createSlice({
       })
       .addCase(getOrderFeedDetailsThunk.fulfilled, (state, action) => {
         state.loading = "succeeded";
-        console.log('action.payload.data', action.payload)
         state.orderFeedDetails = action.payload;
         state.error = initialState.error;
       });

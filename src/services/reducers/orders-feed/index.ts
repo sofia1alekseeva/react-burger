@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { TOrderFeed, TOrdersFeed } from "../../../interfaces/IOrderFeed";
 
 export interface IInitialState {
@@ -36,13 +36,18 @@ const ordersFeedSlice = createSlice({
     clearOrdersError: (state) => {
       state.error = undefined;
     },
-    setOrdersData: (state, action) => {
+    setOrdersData: (state, action: PayloadAction<TOrdersFeed>) => {
       state.ordersFeedData = {
         ...action.payload,
-        orders: action.payload?.orders?.sort(
-          (a: any, b: any) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-        ),
+        orders: action.payload?.orders
+          ?.sort(
+            (a, b) =>
+              new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+          )
+          .map((item) => ({
+            ...item,
+            ingredients: item.ingredients.filter((i) => i),
+          })),
       };
       state.error = undefined;
     },
