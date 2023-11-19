@@ -6,8 +6,8 @@ type TInitialState = {
   loading?: string;
 };
 
-const initialState: TInitialState = {
-  error: "",
+export const initialState: TInitialState = {
+  error: undefined,
   loading: "",
 };
 

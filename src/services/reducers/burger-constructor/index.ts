@@ -7,14 +7,14 @@ type TInitialState = {
   sum: number;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   bun: null,
   main: [],
   sum: 0,
 };
 
 const burgerConstructorSlice = createSlice({
-  name: "ingredient",
+  name: "burgerConstructor",
   initialState,
   reducers: {
     setBun: (state, action) => {

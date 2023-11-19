@@ -4,13 +4,13 @@ import { getOrderFeedDetails } from "../../../utils/api/orders";
 
 export interface IInitialState {
   orderFeedDetails: TOrderFeed | null;
-  error?: string | SerializedError;
+  error?: string;
   loading?: string;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   orderFeedDetails: null,
-  error: "",
+  error: undefined,
   loading: "",
 };
 
@@ -40,7 +40,7 @@ const orderFeedDetailsSlice = createSlice({
       })
       .addCase(getOrderFeedDetailsThunk.rejected, (state, action) => {
         state.loading = "failed";
-        state.error = action.error;
+        state.error = action.error.message;
       })
       .addCase(getOrderFeedDetailsThunk.fulfilled, (state, action) => {
         state.loading = "succeeded";

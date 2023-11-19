@@ -6,9 +6,9 @@ type TInitialState = {
   error?: string;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   loading: "",
-  error: "",
+  error: undefined,
 };
 
 export const resetPasswordThunk = createAsyncThunk(

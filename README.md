@@ -1,6 +1,6 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## [Stellar Burgers on GH-Pages](https://sofia1alekseeva.github.io/react-burger/)
+## [Maket Figma](https://www.figma.com/file/zFGN2O5xktHl9VmoOieq5E/React-_-Проектные-задачи_external_link?node-id=849%3A1002&t=RQU0U6CIfOJJSKVg-0)
 
 ## Available Scripts
 

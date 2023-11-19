@@ -14,13 +14,13 @@ export interface ICountIngredient extends IIngredient {
 type TInitialState = {
   ingredients: Array<ICountIngredient>;
   loading?: string;
-  error?: string | SerializedError;
+  error?: string ;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   ingredients: [],
-  loading: "idle",
-  error: "",
+  loading: "",
+  error: undefined,
 };
 
 export const getIngredientsThunk = createAsyncThunk("ingredients", async () => {
@@ -78,7 +78,7 @@ export const ingredientsSlice = createSlice({
       })
       .addCase(getIngredientsThunk.rejected, (state, action) => {
         state.loading = "failed";
-        state.error = action.error;
+        state.error = action.error.message;
       })
       .addCase(getIngredientsThunk.fulfilled, (state, action) => {
         state.loading = "succeeded";

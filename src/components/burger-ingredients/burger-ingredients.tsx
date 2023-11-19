@@ -92,7 +92,7 @@ export const BurgerIngredients = () => {
         >
           {title[array[0].type]}
         </p>
-        <div className={`${styles.ingredientsType} pl-4`}>
+        <div className={`${styles.ingredientsType} pl-2`}>
           {array.map((item) => (
             <BurgerIngredient
               key={item._id}
