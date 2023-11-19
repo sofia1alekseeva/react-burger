@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { useEffect } from "react";
 import AppRoutes from "../app-routes/app-routes";
 import { getIngredientsThunk } from "../../services/reducers/ingredients";
@@ -35,9 +35,9 @@ function App() {
   }, [refreshToken, accessToken, userData, dispatch]);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppRoutes />
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

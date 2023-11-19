@@ -12,7 +12,7 @@ type TInitialState = {
   error?: string | SerializedError;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   orderDetails: {
     name: "",
     order: {
@@ -20,8 +20,8 @@ const initialState: TInitialState = {
     },
     success: false,
   },
-  loading: "idle",
-  error: "",
+  loading: "",
+  error: undefined,
 };
 
 export const sendOrderDetailsThunk = createAsyncThunk(
@@ -32,7 +32,11 @@ export const sendOrderDetailsThunk = createAsyncThunk(
 export const orderDetailsSlice = createSlice({
   name: "orderDetails",
   initialState,
-  reducers: {},
+  reducers: {
+    clearOrderDetailsError: (state) => {
+      state.error = undefined;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(sendOrderDetailsThunk.pending, (state) => {
@@ -40,7 +44,7 @@ export const orderDetailsSlice = createSlice({
       })
       .addCase(sendOrderDetailsThunk.rejected, (state, action) => {
         state.loading = "failed";
-        state.error = action.error;
+        state.error = action.error.message;
       })
       .addCase(sendOrderDetailsThunk.fulfilled, (state, action) => {
         state.loading = "succeeded";
@@ -49,5 +53,7 @@ export const orderDetailsSlice = createSlice({
       });
   },
 });
+
+export const { clearOrderDetailsError } = orderDetailsSlice.actions;
 
 export default orderDetailsSlice.reducer;

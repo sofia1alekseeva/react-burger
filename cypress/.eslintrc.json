@@ -1,0 +1,9 @@
+{
+    "plugins": [
+      "cypress"
+    ],
+    "extends": [
+      "plugin:cypress/recommended"
+    ],
+    "cypress/unsafe-to-chain-command": "off"
+  }

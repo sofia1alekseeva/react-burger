@@ -6,8 +6,8 @@ type TInitialState = {
   loading?: string;
 };
 
-const initialState: TInitialState = {
-  error: "",
+export const initialState: TInitialState = {
+  error: undefined,
   loading: "",
 };
 
@@ -28,10 +28,17 @@ const loginSlice = createSlice({
     });
     builder.addCase(loginThunk.fulfilled, (state, action) => {
       action.payload.data.refreshToken &&
-        localStorage.setItem("refreshToken", action.payload.data.refreshToken);
+        localStorage.setItem(
+          "refreshToken",
+          action.payload.data.refreshToken
+        );
       action.payload.data.accessToken &&
-        localStorage.setItem("accessToken", action.payload.data.accessToken);
+        localStorage.setItem(
+          "accessToken",
+          action.payload.data.accessToken
+        );
       state.loading = "succeeded";
+      state.error = undefined;
     });
     builder.addCase(loginThunk.rejected, (state, action) => {
       state.loading = "failed";

@@ -8,11 +8,11 @@ export interface IInitialState {
   error?: string;
 }
 
-const initialState: IInitialState = {
+export const initialState: IInitialState = {
   ordersFeedData: null,
   isSocket: false,
   socketUrl: "",
-  error: "",
+  error: undefined,
 };
 
 const ordersFeedSlice = createSlice({

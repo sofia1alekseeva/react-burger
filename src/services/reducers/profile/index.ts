@@ -13,10 +13,10 @@ type TInitialState = {
   error?: string;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
   user: null,
   loading: "",
-  error: "",
+  error: undefined,
 };
 
 export const getUserThunk = createAsyncThunk("profile/getUser", async () => {
